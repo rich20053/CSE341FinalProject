@@ -1,0 +1,164 @@
+// LOCALHOST 
+// SONGS
+### Get all songs GET http://localhost:8080/songs
+
+### Get song by id GET http://localhost:8080/songs/65a60dddc88ca384b22d9e9d
+
+### Create song POST http://localhost:8080/songs
+
+{
+  "title":"Super Trouper",
+  "artist_id":"65c44dbdd645fd235e4341b1",
+  "album_id":"65c5963beac7935a57b46d30",
+  "time":"7:54"
+}
+
+### PUT song PUT http://localhost:8080/songs/6220bcb39cd507e920c75a0b
+
+{
+  "title":"Johnny B. Goode",
+  "artist_id":"65c469292014bc2360d15048",
+  "album_id":"65c7c8e2140e0d7784a8e006",
+  "time":"6:32"
+}
+
+### DELETE song DELETE http://localhost:8080/songs/6220b775099269ff7b31ceab
+
+// ARTISTS
+### Get all artists GET http://localhost:8080/artists
+
+### Get artist by id GET http://localhost:8080/artists/65a60dddc88ca384b22d9e9d
+
+### Create artist POST http://localhost:8080/artists
+
+{
+    "name": "Journie",
+    "type": "Group"
+}
+
+### PUT artist PUT http://localhost:8080/artists/6220bcb39cd507e920c75a0b
+
+{
+    "name": "Journey",
+    "type": "Group"
+}
+
+### DELETE artist DELETE http://localhost:8080/artists/6220b775099269ff7b31ceab
+
+
+// ALBUMS
+### Get all albums GET http://localhost:8080/albums
+
+### Get album by id GET http://localhost:8080/albums/65a60dddc88ca384b22d9e9d
+
+### Create album POST http://localhost:8080/albums
+
+{
+  "title":"Amore",
+  "artist_id":"65c469342014bc2360d15049",
+  "media":"CD",
+  "genre":"Classical",
+  "year":1996,
+  "tracks":8, 
+  "mins":29, 
+  "discnbr":1
+}
+
+### PUT album PUT http://localhost:8080/albums/6220bcb39cd507e920c75a0b
+
+{
+  "title":"Amore",
+  "artist_id":"65c469342014bc2360d15049",
+  "media":"CD",
+  "genre":"Classical",
+  "year":2006,
+  "tracks":8, 
+  "mins":29, 
+  "discnbr":1
+}
+
+### DELETE album DELETE http://localhost:8080/albums/6220b775099269ff7b31ceab
+
+
+// PRODUCTION Deploy 
+
+//SONGS
+### Get all songs GET https://week5service.onrender.com/songs
+
+### Get song by id GET https://week5service.onrender.com/songs/622023f642f9ab4cd6e060b3
+
+### Create song POST https://week5service.onrender.com/songs
+
+{
+  "title":"Super Trouper",
+  "artist_id":"65c44dbdd645fd235e4341b1",
+  "album_id":"65c5963beac7935a57b46d30",
+  "time":"7:54"
+}
+
+### PUT song PUT https://week5service.onrender.com/songs/6220bcb39cd507e920c75a0b
+
+{
+  "title":"Johnny B. Goode",
+  "artist_id":"65c469292014bc2360d15048",
+  "album_id":"65c7c8e2140e0d7784a8e006",
+  "time":"6:32"
+}
+
+### DELETE song DELETE https://week5service.onrender.com/songs/6220e34083149913680f9a64
+
+// ARTISTS
+### Get all artists GET http://week5service.onrender.com/artists
+
+### Get artist by id GET http://week5service.onrender.com/artists/65a60dddc88ca384b22d9e9d
+
+### Create artist POST http://week5service.onrender.com/artists
+
+{
+    "name": "Journie",
+    "type": "Group"
+}
+
+### PUT artist PUT http://week5service.onrender.com/artists/6220bcb39cd507e920c75a0b
+
+{
+    "name": "Journey",
+    "type": "Group"
+}
+
+### DELETE artist DELETE http://week5service.onrender.com/artists/6220b775099269ff7b31ceab
+
+
+// ALBUMS
+### Get all albums GET http://week5service.onrender.com/albums
+
+### Get album by id GET http://week5service.onrender.com/albums/65a60dddc88ca384b22d9e9d
+
+### Create album POST http://week5service.onrender.com/albums
+
+{
+  "title":"Amore",
+  "artist_id":"65c469342014bc2360d15049",
+  "media":"CD",
+  "genre":"Classical",
+  "year":1996,
+  "tracks":8, 
+  "mins":29, 
+  "discnbr":1
+}
+
+### PUT album PUT http://week5service.onrender.com/albums/6220bcb39cd507e920c75a0b
+
+{
+  "title":"Amore",
+  "artist_id":"65c469342014bc2360d15049",
+  "media":"CD",
+  "genre":"Classical",
+  "year":2006,
+  "tracks":8, 
+  "mins":29, 
+  "discnbr":1
+}
+
+### DELETE album DELETE http://week5service.onrender.com/albums/6220b775099269ff7b31ceab
+
