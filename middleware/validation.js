@@ -1,7 +1,7 @@
 const validator = require('../util/validate');
 
-// Check data to be added to the artist collection
-const artistCheck = async (req, res, next) => {
+// Check data to be added to the plant collection
+const plantCheck = async (req, res, next) => {
     const validationRule = {
       "name": "required|string",
       "type": "required|string"
@@ -21,7 +21,7 @@ const artistCheck = async (req, res, next) => {
     }).catch( err => console.log(err))
 }
 
-const albumCheck = async (req, res, next) => {
+const careCheck = async (req, res, next) => {
     const validationRule = {
       "title": "required|string",
       "artist_id": "required|string|min:24|max:24",
@@ -47,7 +47,29 @@ const albumCheck = async (req, res, next) => {
     }).catch( err => console.log(err))
 }
 
-const songCheck = async (req, res, next) => {
+const categoryCheck = async (req, res, next) => {
+    const validationRule = {
+      "title": "required|string",
+      "artist_id": "required|string|min:24|max:24",
+      "album_id": "required|string|min:24|max:24",
+      "time": "string"
+    };
+
+    await validator(req.body, validationRule, {}, (err, status) => {
+        if (!status) {
+            res.status(412)
+                .send({
+                    success: false,
+                    message: 'Validation failed',
+                    data: err
+                });
+        } else {
+            next();
+        }
+    }).catch( err => console.log(err))
+}
+
+const careTypeCheck = async (req, res, next) => {
     const validationRule = {
       "title": "required|string",
       "artist_id": "required|string|min:24|max:24",
@@ -70,7 +92,8 @@ const songCheck = async (req, res, next) => {
 }
 
 module.exports = {
-    artistCheck,
-    albumCheck,
-    songCheck
+    plantCheck,
+    careCheck,
+    categoryCheck,
+    careTypeCheck
 };

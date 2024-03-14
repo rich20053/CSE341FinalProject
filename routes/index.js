@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 router.use('/', require('./swagger'));
-router.use('/songs', require('./songs'));
-router.use('/artists', require('./artists'));
-router.use('/albums', require('./albums'));
-//router.use('/artistsongs', require('./artistsongs'));
+router.use('/plants', require('./plants'));
+router.use('/care', require('./care'));
+router.use('/category', require('./category'));
+router.use('/caretype', require('./caretype'));
 
 module.exports = router;
