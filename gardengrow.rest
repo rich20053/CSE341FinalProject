@@ -1,164 +1,231 @@
 // LOCALHOST 
-// SONGS
-### Get all songs GET http://localhost:8080/songs
+// PLANTS
+### Get all songs GET http://localhost:8080/plants
 
-### Get song by id GET http://localhost:8080/songs/65a60dddc88ca384b22d9e9d
+### Get song by id GET http://localhost:8080/plants/65a60dddc88ca384b22d9e9d
 
-### Create song POST http://localhost:8080/songs
-
-{
-  "title":"Super Trouper",
-  "artist_id":"65c44dbdd645fd235e4341b1",
-  "album_id":"65c5963beac7935a57b46d30",
-  "time":"7:54"
-}
-
-### PUT song PUT http://localhost:8080/songs/6220bcb39cd507e920c75a0b
+### Create song POST http://localhost:8080/plants
 
 {
-  "title":"Johnny B. Goode",
-  "artist_id":"65c469292014bc2360d15048",
-  "album_id":"65c7c8e2140e0d7784a8e006",
-  "time":"6:32"
+  {
+    "name": "Burbank Russet Potato",
+    "scientificName": "Solanum tuberosum",
+    "categoryId": "65f507ffbff26de7fd7c9e25",
+    "coldestZone": 2,
+    "warmestZone": 10,
+    "colors": [
+      "White"
+    ],
+    "height": 30,
+    "space": 22,
+    "daysToGermination": 28,
+    "daysToFlower": 75,
+    "daysToHarvest": 130
+  }
 }
 
-### DELETE song DELETE http://localhost:8080/songs/6220b775099269ff7b31ceab
-
-// ARTISTS
-### Get all artists GET http://localhost:8080/artists
-
-### Get artist by id GET http://localhost:8080/artists/65a60dddc88ca384b22d9e9d
-
-### Create artist POST http://localhost:8080/artists
+### PUT plant PUT http://localhost:8080/plants/6220bcb39cd507e920c75a0b
 
 {
-    "name": "Journie",
-    "type": "Group"
+  {
+    "name": "Burbank Russet Potato",
+    "scientificName": "Solanum tuberosum",
+    "categoryId": "65f507ffbff26de7fd7c9e25",
+    "coldestZone": 3,
+    "warmestZone": 10,
+    "colors": [
+      "White"
+    ],
+    "height": 30,
+    "space": 22,
+    "daysToGermination": 28,
+    "daysToFlower": 75,
+    "daysToHarvest": 130
+  }
 }
 
-### PUT artist PUT http://localhost:8080/artists/6220bcb39cd507e920c75a0b
+### DELETE plant DELETE http://localhost:8080/plants/6220b775099269ff7b31ceab
+
+// Categories
+### Get all categories GET http://localhost:8080/category
+
+### Get category by id GET http://localhost:8080/category/65a60dddc88ca384b22d9e9d
+
+### Create category POST http://localhost:8080/category
 
 {
-    "name": "Journey",
-    "type": "Group"
+    "name": "Shrubery"
 }
 
-### DELETE artist DELETE http://localhost:8080/artists/6220b775099269ff7b31ceab
-
-
-// ALBUMS
-### Get all albums GET http://localhost:8080/albums
-
-### Get album by id GET http://localhost:8080/albums/65a60dddc88ca384b22d9e9d
-
-### Create album POST http://localhost:8080/albums
+### PUT category PUT http://localhost:8080/category/6220bcb39cd507e920c75a0b
 
 {
-  "title":"Amore",
-  "artist_id":"65c469342014bc2360d15049",
-  "media":"CD",
-  "genre":"Classical",
-  "year":1996,
-  "tracks":8, 
-  "mins":29, 
-  "discnbr":1
+    "name": "Shrub"
 }
 
-### PUT album PUT http://localhost:8080/albums/6220bcb39cd507e920c75a0b
+### DELETE category DELETE http://localhost:8080/category/6220b775099269ff7b31ceab
+
+
+// Cares
+### Get all cares GET http://localhost:8080/care
+
+### Get care by id GET http://localhost:8080/care/65a60dddc88ca384b22d9e9d
+
+### Create care POST http://localhost:8080/care
 
 {
-  "title":"Amore",
-  "artist_id":"65c469342014bc2360d15049",
-  "media":"CD",
-  "genre":"Classical",
-  "year":2006,
-  "tracks":8, 
-  "mins":29, 
-  "discnbr":1
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late Summer or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
 }
 
-### DELETE album DELETE http://localhost:8080/albums/6220b775099269ff7b31ceab
+### PUT care PUT http://localhost:8080/care/6220bcb39cd507e920c75a0b
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late winter or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### DELETE care DELETE http://localhost:8080/care/6220b775099269ff7b31ceab
+
+// Care Types
+### Get all caretypes GET http://localhost:8080/caretype
+
+### Get caretype by id GET http://localhost:8080/caretype/65a60dddc88ca384b22d9e9d
+
+### Create caretype POST http://localhost:8080/caretype
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late Summer or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### PUT caretype PUT http://localhost:8080/caretype/6220bcb39cd507e920c75a0b
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late winter or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### DELETE caretype DELETE http://localhost:8080/caretype/6220b775099269ff7b31ceab
 
 
 // PRODUCTION Deploy 
 
-//SONGS
-### Get all songs GET https://week5service.onrender.com/songs
+// PLANTS
+### Get all songs GET https://gardengrow.onrender.com/plants
 
-### Get song by id GET https://week5service.onrender.com/songs/622023f642f9ab4cd6e060b3
+### Get song by id GET https://gardengrow.onrender.com/plants/65a60dddc88ca384b22d9e9d
 
-### Create song POST https://week5service.onrender.com/songs
-
-{
-  "title":"Super Trouper",
-  "artist_id":"65c44dbdd645fd235e4341b1",
-  "album_id":"65c5963beac7935a57b46d30",
-  "time":"7:54"
-}
-
-### PUT song PUT https://week5service.onrender.com/songs/6220bcb39cd507e920c75a0b
+### Create song POST https://gardengrow.onrender.com/plants
 
 {
-  "title":"Johnny B. Goode",
-  "artist_id":"65c469292014bc2360d15048",
-  "album_id":"65c7c8e2140e0d7784a8e006",
-  "time":"6:32"
+  {
+    "name": "Burbank Russet Potato",
+    "scientificName": "Solanum tuberosum",
+    "categoryId": "65f507ffbff26de7fd7c9e25",
+    "coldestZone": 2,
+    "warmestZone": 10,
+    "colors": [
+      "White"
+    ],
+    "height": 30,
+    "space": 22,
+    "daysToGermination": 28,
+    "daysToFlower": 75,
+    "daysToHarvest": 130
+  }
 }
 
-### DELETE song DELETE https://week5service.onrender.com/songs/6220e34083149913680f9a64
-
-// ARTISTS
-### Get all artists GET http://week5service.onrender.com/artists
-
-### Get artist by id GET http://week5service.onrender.com/artists/65a60dddc88ca384b22d9e9d
-
-### Create artist POST http://week5service.onrender.com/artists
+### PUT plant PUT https://gardengrow.onrender.com/plants/6220bcb39cd507e920c75a0b
 
 {
-    "name": "Journie",
-    "type": "Group"
+  {
+    "name": "Burbank Russet Potato",
+    "scientificName": "Solanum tuberosum",
+    "categoryId": "65f507ffbff26de7fd7c9e25",
+    "coldestZone": 3,
+    "warmestZone": 10,
+    "colors": [
+      "White"
+    ],
+    "height": 30,
+    "space": 22,
+    "daysToGermination": 28,
+    "daysToFlower": 75,
+    "daysToHarvest": 130
+  }
 }
 
-### PUT artist PUT http://week5service.onrender.com/artists/6220bcb39cd507e920c75a0b
+### DELETE plant DELETE https://gardengrow.onrender.com/plants/6220b775099269ff7b31ceab
+
+// Categories
+### Get all categories GET https://gardengrow.onrender.com/category
+
+### Get category by id GET https://gardengrow.onrender.com/category/65a60dddc88ca384b22d9e9d
+
+### Create category POST https://gardengrow.onrender.com/category
 
 {
-    "name": "Journey",
-    "type": "Group"
+    "name": "Shrubery"
 }
 
-### DELETE artist DELETE http://week5service.onrender.com/artists/6220b775099269ff7b31ceab
-
-
-// ALBUMS
-### Get all albums GET http://week5service.onrender.com/albums
-
-### Get album by id GET http://week5service.onrender.com/albums/65a60dddc88ca384b22d9e9d
-
-### Create album POST http://week5service.onrender.com/albums
+### PUT category PUT https://gardengrow.onrender.com/category/6220bcb39cd507e920c75a0b
 
 {
-  "title":"Amore",
-  "artist_id":"65c469342014bc2360d15049",
-  "media":"CD",
-  "genre":"Classical",
-  "year":1996,
-  "tracks":8, 
-  "mins":29, 
-  "discnbr":1
+    "name": "Shrub"
 }
 
-### PUT album PUT http://week5service.onrender.com/albums/6220bcb39cd507e920c75a0b
+### DELETE category DELETE https://gardengrow.onrender.com/category/6220b775099269ff7b31ceab
+
+
+// Cares
+### Get all cares GET https://gardengrow.onrender.com/care
+
+### Get care by id GET https://gardengrow.onrender.com/care/65a60dddc88ca384b22d9e9d
+
+### Create care POST https://gardengrow.onrender.com/care
 
 {
-  "title":"Amore",
-  "artist_id":"65c469342014bc2360d15049",
-  "media":"CD",
-  "genre":"Classical",
-  "year":2006,
-  "tracks":8, 
-  "mins":29, 
-  "discnbr":1
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late Summer or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
 }
 
-### DELETE album DELETE http://week5service.onrender.com/albums/6220b775099269ff7b31ceab
+### PUT care PUT https://gardengrow.onrender.com/care/6220bcb39cd507e920c75a0b
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late winter or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### DELETE care DELETE https://gardengrow.onrender.com/care/6220b775099269ff7b31ceab
+
+// Care Types
+### Get all caretypes GET https://gardengrow.onrender.com/caretype
+
+### Get caretype by id GET https://gardengrow.onrender.com/caretype/65a60dddc88ca384b22d9e9d
+
+### Create caretype POST https://gardengrow.onrender.com/caretype
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late Summer or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### PUT caretype PUT https://gardengrow.onrender.com/caretype/6220bcb39cd507e920c75a0b
+
+{
+    "plantId": "65f2708ad22b76d6ea65e7f8",
+    "careTypeId": "65f50992bff26de7fd7c9e26",
+    "description": "Prune in late winter or early spring. Remove dead parts. Remove any dead branches and canes. Prune broken or unhealthy branches. Prune diseased or damaged branches back to healthy wood. Remove crossed branches. Clip away branches that cross through the center of the plant. Prevent rubbing branches."
+}
+
+### DELETE caretype DELETE https://gardengrow.onrender.com/caretype/6220b775099269ff7b31ceab
+
 
