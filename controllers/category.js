@@ -1,4 +1,4 @@
-//const { isNull } = require('util');
+// Category Controller
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -9,7 +9,6 @@ const getAll = async (req, res, next) => {
   console.log(result.toArray.length);
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
-    console.log(lists);
     res.status(200).json(lists);
   });
 };

@@ -9,9 +9,9 @@ router.get('/', plantsController.getAll);
 
 router.get('/:id', plantsController.getSingle);
 
-router.post('/', validation.deletePlantCheck, plantsController.createPlant);
+router.post('/', validation.plantCheck, plantsController.createPlant);
 
-router.put('/:id', validation.deletePlantCheck, plantsController.updatePlant);
+router.put('/:id', validation.plantCheck, plantsController.updatePlant);
 
 router.delete('/:id', plantsController.deletePlant);
 

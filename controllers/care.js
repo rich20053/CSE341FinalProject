@@ -1,11 +1,11 @@
-//const { isNull } = require('util');
+// Care Controller
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 // Return all cares
 const getAll = async (req, res, next) => {
   
-  const result = await mongodb.getDb().db("music").collection('care').find();
+  const result = await mongodb.getDb().db("gardengrow").collection('care').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -21,7 +21,7 @@ const getSingle = async (req, res, next) => {
 
   const careId = new ObjectId(req.params.id);
 
-  const result = await mongodb.getDb().db("music").collection('care').find({ _id: careId });
+  const result = await mongodb.getDb().db("gardengrow").collection('care').find({ _id: careId });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
@@ -34,13 +34,13 @@ const createCare = async (req, res, next) => {
   // Create a care
   const care = {
     title: req.body.title,
-    plant_id: new ObjectId(req.body.plantId),
-    caretype_id: new ObjectId(req.body.careTypeId),
+    plantId: new ObjectId(req.body.plantId),
+    caretypeId: new ObjectId(req.body.careTypeId),
     description: req.body.description
   }
 
   // Save care in the database
-  const result = await mongodb.getDb().db("music").collection('care').insertOne(care);
+  const result = await mongodb.getDb().db("gardengrow").collection('care').insertOne(care);
 
   if (result.acknowledged) {
     res.status(201).json(result);
@@ -61,13 +61,13 @@ const updateCare = async (req, res, next) => {
   // Update a care
   const care = {
     title: req.body.title,
-    plant_id: new ObjectId(req.body.plantId),
-    caretype_id: new ObjectId(req.body.careTypeId),
+    plantId: new ObjectId(req.body.plantId),
+    caretypeId: new ObjectId(req.body.careTypeId),
     description: req.body.description
   }
   
   // Update data in database
-  const response = await mongodb.getDb().db("music").collection('care').replaceOne({ _id: careId }, care);
+  const response = await mongodb.getDb().db("gardengrow").collection('care').replaceOne({ _id: careId }, care);
   console.log(response);
   if (response.modifiedCount > 0) {
     res.status(204).send();
@@ -85,7 +85,7 @@ const deleteCare = async (req, res, next) => {
 
   const careId = new ObjectId(req.params.id);
   
-  const response = await mongodb.getDb().db("music").collection('care').deleteOne({ _id: careId }, true);
+  const response = await mongodb.getDb().db("gardengrow").collection('care').deleteOne({ _id: careId }, true);
   if (response.deletedCount > 0) {
     res.status(200).send();
   } else {

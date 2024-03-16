@@ -4,8 +4,8 @@ const ObjectId = require('mongodb').ObjectId;
 
 // Return all care types
 const getAll = async (req, res, next) => {
-  
-  const result = await mongodb.getDb().db("gardengrow").collection('caretype').find({"artist_id": artistId});
+
+  const result = await mongodb.getDb().db("gardengrow").collection('caretype').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);

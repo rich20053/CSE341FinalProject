@@ -1,3 +1,4 @@
+// Plant Controller
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -57,8 +58,8 @@ const createPlant = async (req, res, next) => {
   // Create an plant
   const plant = {
     name: req.body.name,
-    scientific_name: req.body.scientificName,
-    category_id: plantId,
+    scientificName: req.body.scientificName,
+    categoryId: categoryId,
     coldestZone: req.body.coldestZone,
     warmestZone: req.body.warmestZone,
     colors: req.body.colors,
@@ -91,8 +92,8 @@ const updatePlant = async (req, res, next) => {
   // Update a plant
   const plant = {
     name: req.body.name,
-    scientific_name: req.body.scientificName,
-    category_id: new ObjectId(req.body.category_id),
+    scientificName: req.body.scientificName,
+    categoryId: new ObjectId(req.body.category_id),
     coldestZone: req.body.coldestZone,
     warmestZone: req.body.warmestZone,
     colors: req.body.colors,

@@ -1,3 +1,4 @@
+// Garden Grow API
 const express = require('express');
 const mongodb = require('./models/connect');
 const bodyParser = require('body-parser');
