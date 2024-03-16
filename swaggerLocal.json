@@ -5,10 +5,10 @@
     "description": "API for Home Gardeners",
     "version": "1.0.0"
   },
-  "host": "gardengrow.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api-docs": {

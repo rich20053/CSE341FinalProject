@@ -33,9 +33,8 @@ const createCare = async (req, res, next) => {
 
   // Create a care
   const care = {
-    title: req.body.title,
     plantId: new ObjectId(req.body.plantId),
-    caretypeId: new ObjectId(req.body.careTypeId),
+    careTypeId: new ObjectId(req.body.careTypeId),
     description: req.body.description
   }
 
@@ -60,9 +59,8 @@ const updateCare = async (req, res, next) => {
 
   // Update a care
   const care = {
-    title: req.body.title,
     plantId: new ObjectId(req.body.plantId),
-    caretypeId: new ObjectId(req.body.careTypeId),
+    careTypeId: new ObjectId(req.body.careTypeId),
     description: req.body.description
   }
   

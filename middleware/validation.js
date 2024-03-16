@@ -12,7 +12,7 @@ const plantCheck = async (req, res, next) => {
       "colors": "required",
       "height": "required|integer",
       "space": "required|integer",
-      "daysToGerminate": "required|integer",
+      "daysToGermination": "required|integer",
       "daysToFlower": "required|integer",
       "daysToHarvest": "required|integer"
       };
@@ -33,9 +33,8 @@ const plantCheck = async (req, res, next) => {
 
 const careCheck = async (req, res, next) => {
     const validationRule = {
-      "title": "required|string",
       "plantId": "required|string|min:24|max:24",
-      "caretypeId": "required|string|min:24|max:24",
+      "careTypeId": "required|string|min:24|max:24",
       "description": "required|string",
     };
 

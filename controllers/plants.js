@@ -65,7 +65,7 @@ const createPlant = async (req, res, next) => {
     colors: req.body.colors,
     height: req.body.height,
     space: req.body.space,
-    daysToGerminate: req.body.daysToGerminate,
+    daysToGermination: req.body.daysToGermination,
     daysToFlower: req.body.daysToFlower,
     daysToHarvest: req.body.daysToHarvest
   };
@@ -99,7 +99,7 @@ const updatePlant = async (req, res, next) => {
     colors: req.body.colors,
     height: req.body.height,
     space: req.body.space,
-    daysToGerminate: req.body.daysToGerminate,
+    daysToGermination: req.body.daysToGermination,
     daysToFlower: req.body.daysToFlower,
     daysToHarvest: req.body.daysToHarvest
   };

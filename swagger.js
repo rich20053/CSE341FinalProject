@@ -2,14 +2,14 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Music API',
-    description: 'API for My Music Collection'
+    title: 'Garden Grwo API',
+    description: 'API for Home Gardening'
   },
-  host: 'week6service.onrender.com',
-  //host: 'localhost:8080',
+  //host: 'gardengrow.onrender.com',
+  host: 'localhost:8080',
   schemes: [
-    'https'
-    //'http'
+    //'https'
+    'http'
   ]
 };
 
