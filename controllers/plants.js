@@ -2,6 +2,7 @@
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
 
+
 // Return all plants
 const getAll = async (req, res, next) => {
   
@@ -131,11 +132,45 @@ const deletePlant = async (req, res, next) => {
   }
 };
 
+// Return one plant by category
+const getPlantsByCategoryName = async (req, res, next) => {
+  if (req.params.name.length == 0) {
+    res.status(400).json("A valid category must be included to retrieve a plant");
+    return;
+  }
+
+  const categoryName = req.params.name;
+  console.log(categoryName);
+/*
+  const catResult = await mongodb.getDb().db("gardengrow").collection('category').find({ name: categoryName });
+  catResult.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists[0]);
+  });
+  */
+  const collection = mongodb.getDb().db("gardengrow").collection('category');
+  
+  //const reqCategoryDoc = await collection.findOne({}, { name: categoryName } );
+  const reqCategoryId = await collection.find({ name: categoryName });
+  console.log(reqCategoryId);
+
+  //const reqCategoryId = reqCategoryDoc._id;
+  //console.log(reqCategoryId);
+
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ categoryId: reqCategoryId });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 module.exports = { 
   getAll, 
   getSingle, 
   createPlant, 
   updatePlant, 
-  deletePlant 
+  deletePlant,
+  getPlantsByCategoryName 
 };
 

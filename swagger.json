@@ -1,21 +1,19 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Garden Grow API",
-    "description": "API for Home Gardeners",
+    "title": "Garden Grwo API",
+    "description": "API for Home Gardening",
     "version": "1.0.0"
   },
-  "host": "gardengrow.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/api-docs": {
       "get": {
-        "description": "API Documentation",
-        "tags": 
-          ["Documentation"],
+        "description": "",
         "responses": {
           "default": {
             "description": ""
@@ -25,9 +23,7 @@
     },
     "/plants/": {
       "get": {
-        "description": "Get All Plants",
-        "tags": 
-          ["Plants"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -38,9 +34,7 @@
         }
       },
       "post": {
-        "description": "Insert Plants",
-        "tags": 
-          ["Plants"],
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -72,7 +66,7 @@
                 "space": {
                   "example": "any"
                 },
-                "daysToGerminate": {
+                "daysToGermination": {
                   "example": "any"
                 },
                 "daysToFlower": {
@@ -100,9 +94,7 @@
     },
     "/plants/{id}": {
       "get": {
-        "description": "Get Plant by Id",
-        "tags": 
-          ["Plants"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -124,9 +116,7 @@
         }
       },
       "put": {
-        "description": "Update Plant by Id",
-        "tags": 
-          ["Plants"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -164,7 +154,7 @@
                 "space": {
                   "example": "any"
                 },
-                "daysToGerminate": {
+                "daysToGermination": {
                   "example": "any"
                 },
                 "daysToFlower": {
@@ -193,9 +183,7 @@
         }
       },
       "delete": {
-        "description": "Delete Plant by Id",
-        "tags": 
-          ["Plants"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -217,62 +205,15 @@
         }
       }
     },
-    "/category/": {
+    "/plants/category/{name}": {
       "get": {
-        "description": "Get all Categories",
-        "tags": 
-          ["Category"],
-          "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "description": "Insert Categories",
-        "tags": 
-          ["Category"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/category/{id}": {
-      "get": {
-        "description": "Get Category by Id",
-        "tags": 
-          ["Category"],
+        "description": "",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -284,79 +225,14 @@
           },
           "400": {
             "description": "Bad Request"
-          }
-        }
-      },
-      "put": {
-        "description": "Update Category by Id",
-        "tags": 
-          ["Category"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete Category by Id",
-        "tags": 
-          ["Category"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
     },
     "/care/": {
       "get": {
-        "description": "Get All Care Records",
-        "tags": 
-          ["Care"],
-          "produces": [
+        "description": "",
+        "produces": [
           "application/json"
         ],
         "responses": {
@@ -366,9 +242,7 @@
         }
       },
       "post": {
-        "description": "Insert Care Records",
-        "tags": 
-          ["Care"],
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -404,9 +278,7 @@
     },
     "/care/{id}": {
       "get": {
-        "description": "Get Care by Id",
-        "tags": 
-          ["Care"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -428,9 +300,7 @@
         }
       },
       "put": {
-        "description": "Update Care by Id",
-        "tags": 
-          ["Care"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -473,9 +343,7 @@
         }
       },
       "delete": {
-        "description": "Delete Care by Id",
-        "tags": 
-          ["Care"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -497,11 +365,9 @@
         }
       }
     },
-    "/caretype/": {
+    "/category/": {
       "get": {
-        "description": "Get Care Type by Id",
-        "tags": 
-          ["Care Type"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -512,9 +378,7 @@
         }
       },
       "post": {
-        "description": "Insert Care Types",
-        "tags": 
-          ["Care Type"],
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -542,11 +406,9 @@
         }
       }
     },
-    "/caretype/{id}": {
+    "/category/{id}": {
       "get": {
-        "description": "Get Care Type by Id",
-        "tags": 
-          ["Care Type"],
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -568,9 +430,7 @@
         }
       },
       "put": {
-        "description": "Update Care Type by Id",
-        "tags": 
-          ["Care Type"],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -607,9 +467,131 @@
         }
       },
       "delete": {
-        "description": "Delete Care Type by Id",
-        "tags": 
-          ["Care Type"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/caretype/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/caretype/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",

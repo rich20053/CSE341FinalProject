@@ -15,5 +15,8 @@ router.put('/:id', validation.plantCheck, plantsController.updatePlant);
 
 router.delete('/:id', plantsController.deletePlant);
 
+router.get('/category/:name', plantsController.getPlantsByCategoryName);
+
+
 module.exports = router;
 
