@@ -17,6 +17,7 @@ router.delete('/:id', plantsController.deletePlant);
 
 router.get('/category/:name', plantsController.getPlantsByCategoryName);
 
+router.get('/zone/:zone', plantsController.getPlantsByHardinessZone);
 
 module.exports = router;
 

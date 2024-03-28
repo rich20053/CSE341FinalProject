@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Garden Grwo API',
+    title: 'Garden Grow API',
     description: 'API for Home Gardening'
   },
   //host: 'gardengrow.onrender.com',

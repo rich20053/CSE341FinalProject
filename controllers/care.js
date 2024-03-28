@@ -91,11 +91,34 @@ const deleteCare = async (req, res, next) => {
   }
 };
 
+// Return list of cares by plant name
+const getCareByPlantName = async (req, res, next) => {
+  if (req.params.name.length == 0) {
+    res.status(400).json("A valid plant must be included to retrieve a care");
+    return;
+  }
+
+  const plantName = req.params.name;
+  
+  const collection = mongodb.getDb().db("gardengrow").collection('plants');
+  
+  const reqPlantDoc = await collection.findOne({name: plantName});
+  const reqPlantId = reqPlantDoc._id;
+  
+  const result = await mongodb.getDb().db("gardengrow").collection('care').find({ plantId: reqPlantId });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 module.exports = { 
-  getAll, 
-  getSingle, 
-  createCare, 
-  updateCare, 
-  deleteCare 
+  getAll,
+  getSingle,
+  createCare,
+  updateCare,
+  deleteCare,
+  getCareByPlantName 
 };
 

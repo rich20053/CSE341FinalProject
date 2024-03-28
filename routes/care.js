@@ -15,5 +15,7 @@ router.put('/:id', validation.careCheck, careController.updateCare);
 
 router.delete('/:id', careController.deleteCare);
 
+router.get('/plant/:name', careController.getCareByPlantName);
+
 module.exports = router;
 
