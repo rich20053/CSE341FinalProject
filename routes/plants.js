@@ -23,9 +23,17 @@ router.get('/name/:name', plantsController.getPlantsByName);
 
 router.get('/sciname/:name', plantsController.getPlantsByScientificName);
 
+router.get('/height/:direction', plantsController.getPlantsOrderedByHeight);
+
 router.get('/height/:height', plantsController.getPlantsByHeight);
 
 router.get('/height/:lowheight/:topheight', plantsController.getPlantsByHeightRange);
+
+router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);
+
+router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower);
+
+router.get('/harvest/:direction', plantsController.getPlantsOrderedByDaysToHarvest);
 
 module.exports = router;
 

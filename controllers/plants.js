@@ -214,6 +214,26 @@ const getPlantsByScientificName = async (req, res, next) => {
 
 };
 
+// Return list of plants ordered by height
+const getPlantsOrderedByHeight = async (req, res, next) => {
+  if (req.params.direction != 1 && req.params.direction != -1) {
+    res.status(400).json("A valid direction must be included to order plants.");
+    return;
+  }
+
+  const direction = parseInt(req.params.direction);
+
+  //const products = await collection.find().sort({ price: 1 }).toArray();
+  //const products = await collection.find().sort({ price: 1, name: -1 }).toArray();
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ height: direction });
+
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 // Return list of plants by height
 const getPlantsByHeight = async (req, res, next) => {
   if (req.params.height.length == 0) {
@@ -252,6 +272,61 @@ const getPlantsByHeightRange = async (req, res, next) => {
 
 };
 
+// Return list of plants ordered by days to germination
+const getPlantsOrderedByDaysToGermination = async (req, res, next) => {
+  if (req.params.direction != 1 && req.params.direction != -1) {
+    res.status(400).json("A valid direction must be included to order plants.");
+    return;
+  }
+
+  const direction = parseInt(req.params.direction);
+
+  //const products = await collection.find().sort({ price: 1, name: -1 }).toArray();
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToGermination: direction });
+
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
+// Return list of plants ordered by days to flower
+const getPlantsOrderedByDaysToFlower = async (req, res, next) => {
+  if (req.params.direction != 1 && req.params.direction != -1) {
+    res.status(400).json("A valid direction must be included to order plants.");
+    return;
+  }
+
+  const direction = parseInt(req.params.direction);
+
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToFlower: direction });
+
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
+// Return list of plants ordered by days to harvest
+const getPlantsOrderedByDaysToHarvest = async (req, res, next) => {
+  if (req.params.direction != 1 && req.params.direction != -1) {
+    res.status(400).json("A valid direction must be included to order plants.");
+    return;
+  }
+
+  const direction = parseInt(req.params.direction);
+
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToHarvest: direction });
+
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 module.exports = { 
   getAll, 
   getSingle, 
@@ -262,7 +337,11 @@ module.exports = {
   getPlantsByName,
   getPlantsByScientificName,
   getPlantsByHardinessZone,
+  getPlantsOrderedByHeight,
+  getPlantsByHeight,
   getPlantsByHeightRange,
-  getPlantsByHeight 
+  getPlantsOrderedByDaysToGermination,
+  getPlantsOrderedByDaysToFlower,
+  getPlantsOrderedByDaysToHarvest
 };
 
