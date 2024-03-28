@@ -151,8 +151,7 @@ const getPlantsByCategoryName = async (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   });
-
-};
+}
 
 // Return list of plants by hardiness zone
 const getPlantsByHardinessZone = async (req, res, next) => {
@@ -177,6 +176,82 @@ const getPlantsByHardinessZone = async (req, res, next) => {
 
 };
 
+// Return list of plants by name
+const getPlantsByName = async (req, res, next) => {
+  if (req.params.name.length == 0) {
+    res.status(400).json("A valid name must be included to retrieve a plant");
+    return;
+  }
+
+  const plantName = req.params.name;
+
+  const regex = new RegExp(plantName, 'd'); // Case insensitive regex for names 
+  
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ name: regex });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
+// Return list of plants by scientific name
+const getPlantsByScientificName = async (req, res, next) => {
+  if (req.params.name.length == 0) {
+    res.status(400).json("A valid scientific name must be included to retrieve a plant");
+    return;
+  }
+
+  const plantName = req.params.name;
+
+  const regex = new RegExp(plantName, 'd'); // Case insensitive regex for names 
+  
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ scientificName: regex });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
+// Return list of plants by height
+const getPlantsByHeight = async (req, res, next) => {
+  if (req.params.height.length == 0) {
+    res.status(400).json("A valid height must be included to retrieve a plant");
+    return;
+  }
+
+  const plantHeight = parseInt(req.params.height);
+
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ height: plantHeight });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
+// Return list of plants by height range
+const getPlantsByHeightRange = async (req, res, next) => {
+  if (req.params.lowheight.length == 0 || req.params.topheight.length == 0) {
+    res.status(400).json("two valid heights must be included to retrieve a plant");
+    return;
+  }
+
+  const plantLowHeight = parseInt(req.params.lowheight);
+  const plantTopHeight = parseInt(req.params.topheight);
+
+  //const products = await collection.find({ price: { $gte: minPrice, $lte: maxPrice } }).toArray();
+    
+
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ height: { $gte: plantLowHeight, $lte: plantTopHeight } });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 module.exports = { 
   getAll, 
   getSingle, 
@@ -184,6 +259,10 @@ module.exports = {
   updatePlant, 
   deletePlant,
   getPlantsByCategoryName,
-  getPlantsByHardinessZone 
+  getPlantsByName,
+  getPlantsByScientificName,
+  getPlantsByHardinessZone,
+  getPlantsByHeightRange,
+  getPlantsByHeight 
 };
 

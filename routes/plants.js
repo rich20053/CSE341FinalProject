@@ -19,5 +19,13 @@ router.get('/category/:name', plantsController.getPlantsByCategoryName);
 
 router.get('/zone/:zone', plantsController.getPlantsByHardinessZone);
 
+router.get('/name/:name', plantsController.getPlantsByName);
+
+router.get('/sciname/:name', plantsController.getPlantsByScientificName);
+
+router.get('/height/:height', plantsController.getPlantsByHeight);
+
+router.get('/height/:lowheight/:topheight', plantsController.getPlantsByHeightRange);
+
 module.exports = router;
 
