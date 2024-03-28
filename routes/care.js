@@ -17,5 +17,7 @@ router.delete('/:id', careController.deleteCare);
 
 router.get('/plant/:name', careController.getCareByPlantName);
 
+router.get('/type/:name', careController.getCareByTypeName);
+
 module.exports = router;
 

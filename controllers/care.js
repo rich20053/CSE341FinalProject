@@ -113,12 +113,35 @@ const getCareByPlantName = async (req, res, next) => {
 
 };
 
+// Return list of cares by type name
+const getCareByTypeName = async (req, res, next) => {
+  if (req.params.name.length == 0) {
+    res.status(400).json("A valid type must be included to retrieve a care");
+    return;
+  }
+
+  const typeName = req.params.name;
+  
+  const collection = mongodb.getDb().db("gardengrow").collection('caretype');
+  
+  const reqTypeDoc = await collection.findOne({name: typeName});
+  const reqTypeId = reqTypeDoc._id;
+  
+  const result = await mongodb.getDb().db("gardengrow").collection('care').find({ careTypeId: reqTypeId });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 module.exports = { 
   getAll,
   getSingle,
   createCare,
   updateCare,
   deleteCare,
-  getCareByPlantName 
+  getCareByPlantName,
+  getCareByTypeName 
 };
 
