@@ -17,11 +17,13 @@ router.delete('/:id', plantsController.deletePlant);
 
 router.get('/category/:name', plantsController.getPlantsByCategoryName);
 
-router.get('/zone/:zone', plantsController.getPlantsByHardinessZone);
+router.get('/color/:color', plantsController.getPlantsByColor);
 
-router.get('/name/:name', plantsController.getPlantsByName);
+router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower);
 
-router.get('/sciname/:name', plantsController.getPlantsByScientificName);
+router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);
+
+router.get('/harvest/:direction', plantsController.getPlantsOrderedByDaysToHarvest);
 
 router.get('/height/:direction', plantsController.getPlantsOrderedByHeight);
 
@@ -29,11 +31,11 @@ router.get('/height/:height', plantsController.getPlantsByHeight);
 
 router.get('/height/:lowheight/:topheight', plantsController.getPlantsByHeightRange);
 
-router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);
+router.get('/name/:name', plantsController.getPlantsByName);
 
-router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower);
+router.get('/sciname/:name', plantsController.getPlantsByScientificName);
 
-router.get('/harvest/:direction', plantsController.getPlantsOrderedByDaysToHarvest);
+router.get('/zone/:zone', plantsController.getPlantsByHardinessZone);
 
 module.exports = router;
 

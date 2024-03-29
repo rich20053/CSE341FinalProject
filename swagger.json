@@ -229,7 +229,7 @@
         }
       }
     },
-    "/plants/zone/{zone}": {
+    "/plants/color/{color}": {
       "get": {
         "description": "",
         "produces": [
@@ -237,7 +237,7 @@
         ],
         "parameters": [
           {
-            "name": "zone",
+            "name": "color",
             "in": "path",
             "required": true,
             "type": "string"
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/plants/name/{name}": {
+    "/plants/flower/{direction}": {
       "get": {
         "description": "",
         "produces": [
@@ -261,7 +261,7 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "direction",
             "in": "path",
             "required": true,
             "type": "string"
@@ -277,7 +277,7 @@
         }
       }
     },
-    "/plants/sciname/{name}": {
+    "/plants/germination/{direction}": {
       "get": {
         "description": "",
         "produces": [
@@ -285,7 +285,31 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "name": "direction",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/harvest/{direction}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
             "in": "path",
             "required": true,
             "type": "string"
@@ -379,7 +403,7 @@
         }
       }
     },
-    "/plants/germination/{direction}": {
+    "/plants/name/{name}": {
       "get": {
         "description": "",
         "produces": [
@@ -387,7 +411,7 @@
         ],
         "parameters": [
           {
-            "name": "direction",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -403,7 +427,7 @@
         }
       }
     },
-    "/plants/flower/{direction}": {
+    "/plants/sciname/{name}": {
       "get": {
         "description": "",
         "produces": [
@@ -411,7 +435,7 @@
         ],
         "parameters": [
           {
-            "name": "direction",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -427,7 +451,7 @@
         }
       }
     },
-    "/plants/harvest/{direction}": {
+    "/plants/zone/{zone}": {
       "get": {
         "description": "",
         "produces": [
@@ -435,7 +459,7 @@
         ],
         "parameters": [
           {
-            "name": "direction",
+            "name": "zone",
             "in": "path",
             "required": true,
             "type": "string"

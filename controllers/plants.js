@@ -214,6 +214,27 @@ const getPlantsByScientificName = async (req, res, next) => {
 
 };
 
+// Return list of plants by color
+const getPlantsByColor = async (req, res, next) => {
+  if (req.params.color.length == 0) {
+    res.status(400).json("A valid color must be included to retrieve a plant");
+    return;
+  }
+
+  const plantColor = req.params.color;
+
+  const regex = new RegExp(plantColor, 'd'); // Regular Expression for colors 
+  
+  //const books = await collection.find({ authors: { $elemMatch: { name: 'John Doe' } } }).toArray();
+ 
+  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ colors: regex });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+
+};
+
 // Return list of plants ordered by height
 const getPlantsOrderedByHeight = async (req, res, next) => {
   if (req.params.direction != 1 && req.params.direction != -1) {
@@ -336,6 +357,7 @@ module.exports = {
   getPlantsByCategoryName,
   getPlantsByName,
   getPlantsByScientificName,
+  getPlantsByColor,
   getPlantsByHardinessZone,
   getPlantsOrderedByHeight,
   getPlantsByHeight,
