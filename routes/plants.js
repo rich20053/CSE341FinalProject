@@ -21,6 +21,10 @@ router.get('/color/:color', plantsController.getPlantsByColor);
 
 router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower);
 
+router.get('/full', plantsController.getAllFull);
+
+router.get('/full/:id', plantsController.getSingleFull);
+
 router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);
 
 router.get('/harvest/:direction', plantsController.getPlantsOrderedByDaysToHarvest);

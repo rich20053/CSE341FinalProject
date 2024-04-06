@@ -10,25 +10,34 @@ const initDb = (callback) => {
     return callback(null, _db);
   }
 
-  //console.log(process.env.MONGODB_URI);
   MongoClient.connect(process.env.MONGODB_URI)
     .then((client) => {
-      _db = client;
+      _db = client.db('gardengrow');
       callback(null, _db);
     })
     .catch((err) => {
       callback(err);
     });
+
 };
 
 const getDb = () => {
-  if (!_db) {
+  while (!_db) {
     throw Error('Db not initialized');
   }
   return _db;
 };
 
+const closeDb = () => {
+  if (_db) {
+    _db.close(); // closes the database connection
+    _db = null; // resets the _db variable
+  }
+};
+
 module.exports = {
   initDb,
   getDb,
+  closeDb
 };
+

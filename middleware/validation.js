@@ -1,5 +1,6 @@
 // Validation
 const validator = require('../util/validate');
+const app = require("express");
 
 // Check data to be added to the plant collection
 const plantCheck = async (req, res, next) => {
@@ -35,7 +36,7 @@ const careCheck = async (req, res, next) => {
     const validationRule = {
       "plantId": "required|string|min:24|max:24",
       "careTypeId": "required|string|min:24|max:24",
-      "description": "required|string",
+      "description": "required|string"
     };
 
     await validator(req.body, validationRule, {}, (err, status) => {
@@ -53,22 +54,31 @@ const careCheck = async (req, res, next) => {
 }
 
 const categoryCheck = async (req, res, next) => {
+    
     const validationRule = {
       "name": "required|string"
     };
-
     await validator(req.body, validationRule, {}, (err, status) => {
         if (!status) {
-            res.status(412)
-                .send({
-                    success: false,
-                    message: 'Validation failed',
-                    data: err
-                });
+            res.status(412);
+/*            .send({
+                success: false,
+                message: 'Validation failed',
+                data: err
+            });
+            res.status(412);
+    res.send({
+        success: false,
+        message: 'Validation failed' /*,
+        error: {
+            message: err.message // Send only the error message or relevant details
+            // You can include additional error information here if needed
+        }
+    });*/
         } else {
             next();
         }
-    }).catch( err => console.log(err))
+    }).catch(err => console.log(err))
 }
 
 const careTypeCheck = async (req, res, next) => {

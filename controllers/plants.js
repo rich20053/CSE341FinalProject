@@ -1,12 +1,13 @@
 // Plant Controller
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
+const displayPlants = require('../util/displayplants');
 
 
 // Return all plants
 const getAll = async (req, res, next) => {
   
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find();
+  const result = await mongodb.getDb().collection('plants').find();
   //console.log(result);
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -23,7 +24,7 @@ const getSingle = async (req, res, next) => {
 
   const plantId = new ObjectId(req.params.id);
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ _id: plantId });
+  const result = await mongodb.getDb().collection('plants').find({ _id: plantId });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
@@ -41,7 +42,7 @@ const createPlant = async (req, res, next) => {
     console.log("artist block");
     const artist = req.body.artist;
 
-    var myCursor = await mongodb.getDb().db("gardengrow").collection('plants').find({ name: artist });
+    var myCursor = await mongodb.getDb().collection('plants').find({ name: artist });
     var myDocumentList = myCursor.toArray();
 
     var myDocument = myDocumentList[0];
@@ -72,7 +73,7 @@ const createPlant = async (req, res, next) => {
   };
 
   // Save Plant in the database
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').insertOne(plant);
+  const result = await mongodb.getDb().collection('plants').insertOne(plant);
 
   if (result.acknowledged) {
     res.status(201).json(result);
@@ -106,7 +107,7 @@ const updatePlant = async (req, res, next) => {
   };
 
   // Update data in database
-  const response = await mongodb.getDb().db("gardengrow").collection('plants').replaceOne({ _id: plantId }, plant);
+  const response = await mongodb.getDb().collection('plants').replaceOne({ _id: plantId }, plant);
   console.log(response);
   if (response.modifiedCount > 0) {
     res.status(204).send();
@@ -124,7 +125,7 @@ const deletePlant = async (req, res, next) => {
 
   const plantId = new ObjectId(req.params.id);
   
-  const response = await mongodb.getDb().db("gardengrow").collection('plants').deleteOne({ _id: plantId }, true);
+  const response = await mongodb.getDb().collection('plants').deleteOne({ _id: plantId }, true);
   if (response.deletedCount > 0) {
     res.status(200).send();
   } else {
@@ -141,12 +142,12 @@ const getPlantsByCategoryName = async (req, res, next) => {
 
   const categoryName = req.params.name;
 
-  const collection = mongodb.getDb().db("gardengrow").collection('category');
+  const collection = mongodb.getDb().collection('category');
   
   const reqCategoryDoc = await collection.findOne({name: categoryName});
   const reqCategoryId = reqCategoryDoc._id;
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ categoryId: reqCategoryId });
+  const result = await mongodb.getDb().collection('plants').find({ categoryId: reqCategoryId });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -165,7 +166,7 @@ const getPlantsByHardinessZone = async (req, res, next) => {
 
   const rangeLowEnd = { coldestZone: { $lte: hardinessZone } }; // First condition
   const rangeHighEnd = { warmestZone: { $gte: hardinessZone } }; // Second condition
-  const collection = mongodb.getDb().db("gardengrow").collection('plants');
+  const collection = mongodb.getDb().collection('plants');
   // This works ---- const result = await collection.find({ warmestZone: hardinessZone });
   const result = await collection.find({ $and: [rangeLowEnd, rangeHighEnd] });
   
@@ -187,7 +188,7 @@ const getPlantsByName = async (req, res, next) => {
 
   const regex = new RegExp(plantName, 'd'); // Case insensitive regex for names 
   
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ name: regex });
+  const result = await mongodb.getDb().collection('plants').find({ name: regex });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -206,7 +207,7 @@ const getPlantsByScientificName = async (req, res, next) => {
 
   const regex = new RegExp(plantName, 'd'); // Case insensitive regex for names 
   
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ scientificName: regex });
+  const result = await mongodb.getDb().collection('plants').find({ scientificName: regex });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -227,7 +228,7 @@ const getPlantsByColor = async (req, res, next) => {
   
   //const books = await collection.find({ authors: { $elemMatch: { name: 'John Doe' } } }).toArray();
  
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ colors: regex });
+  const result = await mongodb.getDb().collection('plants').find({ colors: regex });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -246,7 +247,7 @@ const getPlantsOrderedByHeight = async (req, res, next) => {
 
   //const products = await collection.find().sort({ price: 1 }).toArray();
   //const products = await collection.find().sort({ price: 1, name: -1 }).toArray();
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ height: direction });
+  const result = await mongodb.getDb().collection('plants').find().sort({ height: direction });
 
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -264,7 +265,7 @@ const getPlantsByHeight = async (req, res, next) => {
 
   const plantHeight = parseInt(req.params.height);
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ height: plantHeight });
+  const result = await mongodb.getDb().collection('plants').find({ height: plantHeight });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -285,7 +286,7 @@ const getPlantsByHeightRange = async (req, res, next) => {
   //const products = await collection.find({ price: { $gte: minPrice, $lte: maxPrice } }).toArray();
     
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find({ height: { $gte: plantLowHeight, $lte: plantTopHeight } });
+  const result = await mongodb.getDb().collection('plants').find({ height: { $gte: plantLowHeight, $lte: plantTopHeight } });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -303,7 +304,7 @@ const getPlantsOrderedByDaysToGermination = async (req, res, next) => {
   const direction = parseInt(req.params.direction);
 
   //const products = await collection.find().sort({ price: 1, name: -1 }).toArray();
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToGermination: direction });
+  const result = await mongodb.getDb().collection('plants').find().sort({ daysToGermination: direction });
 
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -321,7 +322,7 @@ const getPlantsOrderedByDaysToFlower = async (req, res, next) => {
 
   const direction = parseInt(req.params.direction);
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToFlower: direction });
+  const result = await mongodb.getDb().collection('plants').find().sort({ daysToFlower: direction });
 
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -339,13 +340,41 @@ const getPlantsOrderedByDaysToHarvest = async (req, res, next) => {
 
   const direction = parseInt(req.params.direction);
 
-  const result = await mongodb.getDb().db("gardengrow").collection('plants').find().sort({ daysToHarvest: direction });
+  const result = await mongodb.getDb().collection('plants').find().sort({ daysToHarvest: direction });
 
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
   });
 
+};
+
+// Return all plants and print out full detail
+const getAllFull = async (req, res, next) => {
+  
+  const result = await mongodb.getDb().collection('plants').find();
+  //console.log(result);
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
+  });
+};
+
+// Return one plant by id and print out full detail
+const getSingleFull = async (req, res, next) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json("Must use a valid plant id to retrieve a plant");
+    return;
+  }
+
+  const plantId = new ObjectId(req.params.id);
+
+  const result = await mongodb.getDb().collection('plants').find({ _id: plantId });
+  result.toArray().then((lists) => {
+    res.setHeader('Content-Type', 'application/json');
+    var item = displayPlants.plantHTML(lists);
+    res.status(200).json(item);
+  });
 };
 
 module.exports = { 
@@ -364,6 +393,8 @@ module.exports = {
   getPlantsByHeightRange,
   getPlantsOrderedByDaysToGermination,
   getPlantsOrderedByDaysToFlower,
-  getPlantsOrderedByDaysToHarvest
+  getPlantsOrderedByDaysToHarvest,
+  getAllFull,
+  getSingleFull
 };
 
