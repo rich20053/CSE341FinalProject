@@ -121,6 +121,17 @@ const {
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ message: 'Error occurred', error: 'Test error' });
       });
+    
+  //  Unsuccessful getSingle - Invalid ID
+  test('Should return 400 status if invalid CareType ID is provided for GET', async () => {
+    const req = {
+      params: { id: 'invalidID' },
+    };
+
+    await getSingle(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+  });
+
       
       
       // TESTS FOR createCareType
@@ -187,7 +198,7 @@ const {
     });
   
     //  Unsuccessful updateCareType - Invalid ID
-    test('should return 400 status if invalid CareType ID is provided for update', async () => {
+    test('Should return 400 status if invalid CareType ID is provided for update', async () => {
       const req = {
         params: { id: 'invalidID' },
         body: {

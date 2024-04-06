@@ -165,8 +165,17 @@ const {
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ message: 'Error occurred', error: 'Test error' });
       });
-      
-      
+           
+        //  Unsuccessful getSingle - Invalid ID
+  test('Should return 400 status if invalid plant ID is provided for GET', async () => {
+    const req = {
+      params: { id: 'invalidID' },
+    };
+
+    await getSingle(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+  });
+  
       // TESTS FOR createPlants
       // Successful createPlants
       test('Should create a Plants and return 201 status', async () => {
@@ -208,14 +217,14 @@ const {
         const req = {
             body:  {
                 "name": "Petunia",
-                "scientificName": "Petunia integrifolia",
+                "scientificName": 123,
                 "categoryId": "65f2658ad22b76d6ea65e7f4",
                 "coldestZone": 3,
                 "warmestZone": 11,
                 "colors": [
-                  "Purple",
-                  "Pink",
-                  "Blue"
+                  12,
+                  84,
+                  65
                 ],
                 "height": 10,
                 "space": 12,
@@ -300,14 +309,14 @@ const {
     });
   
     // Unsuccessful updatePlants - Invalid fields
-    test('Should return 400 status if fields are invalid for update', async () => {
+    test('Should return 412 status if fields are invalid for update', async () => {
       const req = {
         params: { id: testPlantsData[0]._id.toString() },
         body:  {
             "name": "Petunia",
             "scientificName": "Petunia integrifolia",
             "categoryId": "65f2658ad22b76d6ea65e7f4",
-            "coldestZone": 3,
+            "coldestZone": "This is an Error",
             "warmestZone": 11,
             "colors": [
               "Purple",
@@ -316,7 +325,7 @@ const {
             ],
             "height": 10,
             "space": 12,
-            "daysToGermination": 10,
+            "daysToGermination": "This is an error",
             "daysToFlower": 75,
             "daysToHarvest": 84
           }
@@ -324,7 +333,7 @@ const {
       };
   
       await plantCheck(req, res);
-      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.status).toHaveBeenCalledWith(412);
     });
   
     // TESTS FOR deletePlants

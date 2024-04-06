@@ -121,8 +121,17 @@ const { categoryCheck } = require('../middleware/validation');
       expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({ message: 'Error occurred', error: 'Test error' });
     });
-    
-    
+
+  //  Unsuccessful getSingle - Invalid ID
+  test('Should return 400 status if invalid Category ID is provided for GET', async () => {
+    const req = {
+      params: { id: 'invalidID' },
+    };
+
+    await getSingle(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+  });
+ 
     // TESTS FOR createCategory
     // Successful createCategory
     test('Should create a Category and return 201 status', async () => {
@@ -187,7 +196,7 @@ const { categoryCheck } = require('../middleware/validation');
   });
 
   //  Unsuccessful updateCategory - Invalid ID
-  test('should return 400 status if invalid Category ID is provided for update', async () => {
+  test('Should return 400 status if invalid Category ID is provided for update', async () => {
     const req = {
       params: { id: 'invalidID' },
       body: {

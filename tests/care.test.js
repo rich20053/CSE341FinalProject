@@ -132,7 +132,16 @@ const {
         expect(res.json).toHaveBeenCalledWith({ message: 'Error occurred', error: 'Test error' });
       });
       
-      
+  //  Unsuccessful getSingle - Invalid ID
+  test('Should return 400 status if invalid Care ID is provided for GET', async () => {
+    const req = {
+      params: { id: 'invalidID' },
+    };
+
+    await getSingle(req, res);
+    expect(res.status).toHaveBeenCalledWith(400);
+  });
+
       // TESTS FOR createCare
       // Successful createCare
       test('Should create a Care and return 201 status', async () => {

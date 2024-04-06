@@ -59,11 +59,14 @@ function plantItem(pItem) {
 function plantHTML(plants) {
     var plantsjson = plants;
     var plantHTMLString = "";
-    plantHTMLString += plantHdr();
+
+    console.log("->"+plantHTMLString+"<-"); 
+    //plantHTMLString += plantHdr();
     plantsjson.forEach(plantsjson => {
         plantHTMLString += plantItem(plantsjson);  // Process each plant as needed
     });
-    plantHTMLString += plantFtr(plants.length);   
+    //plantHTMLString += plantFtr(plants.length);  
+    console.log(plantHTMLString); 
     return(plantHTMLString);
 };
 

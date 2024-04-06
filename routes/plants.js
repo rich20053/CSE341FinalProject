@@ -23,6 +23,8 @@ router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower
 
 router.get('/full', plantsController.getAllFull);
 
+//router.get('/full', "../view/plantview.html");
+
 router.get('/full/:id', plantsController.getSingleFull);
 
 router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);

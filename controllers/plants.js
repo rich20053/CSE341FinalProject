@@ -1,6 +1,7 @@
 // Plant Controller
 const mongodb = require('../models/connect');
 const ObjectId = require('mongodb').ObjectId;
+const displayPlants = require('../util/displayplants');
 
 // Return all Plants
 const getAll = async (req, res, next) => {
@@ -356,7 +357,8 @@ const getSingleFull = async (req, res, next) => {
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     var item = displayPlants.plantHTML(lists);
-    res.status(200).json(item);
+    res.status(200);//.json(item);
+    res.send(item);
   });
 };
 
