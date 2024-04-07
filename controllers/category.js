@@ -117,11 +117,29 @@ const deleteCategory = async (req, res, next) => {
   }  
 };
 
+// Return one category by id
+async function getCategoryById (paramId) {
+  try {
+    var catHTML = "";
+    const categoryId = new ObjectId(paramId);
+    const result = await mongodb.getDb()
+      .collection('category')
+      .findOne({ _id: categoryId });
+      catHTML += "<tr><td style='padding: 2px 10px;'>Category: </td><td>";
+      catHTML += result.name;
+      catHTML += "</td></tr>";  
+      return(catHTML);    
+  } catch (err) {
+    return("");
+  };
+};
+
 module.exports = { 
   getAll, 
   getSingle, 
   createCategory, 
   updateCategory, 
-  deleteCategory 
+  deleteCategory,
+  getCategoryById 
 };
 

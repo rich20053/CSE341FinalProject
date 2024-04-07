@@ -126,17 +126,23 @@ const getCareByPlantName = async (req, res, next) => {
 
   const plantName = req.params.name;
   
-  const collection = mongodb.getDb().collection('plants');
+  try {
+    const collection = await mongodb.getDb().collection('plants');
   
-  const reqPlantDoc = await collection.findOne({name: plantName});
-  const reqPlantId = reqPlantDoc._id;
+    const reqPlantDoc = await collection.findOne({name: plantName});
+    const reqPlantId = reqPlantDoc._id;
   
-  const result = await mongodb.getDb().collection('care').find({ plantId: reqPlantId });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
-
+    const result = await mongodb.getDb().collection('care').find({ plantId: reqPlantId });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  } catch (err) {
+    res.status(400).json({ 
+      message: 'An error occurred while getting Care by Plant name.', 
+      error: err.message
+    });
+  }  
 };
 
 // Return list of cares by type name
@@ -148,16 +154,29 @@ const getCareByTypeName = async (req, res, next) => {
 
   const typeName = req.params.name;
   
-  const collection = mongodb.getDb().collection('caretype');
+  try {
+    const collection = mongodb.getDb().collection('caretype');
   
-  const reqTypeDoc = await collection.findOne({name: typeName});
-  const reqTypeId = reqTypeDoc._id;
-  
-  const result = await mongodb.getDb().collection('care').find({ careTypeId: reqTypeId });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+    const reqTypeDoc = await collection.findOne({name: typeName});
+    const reqTypeId = reqTypeDoc._id;
+    console.log(typeName);
+    console.log(reqTypeId);
+    const result = await mongodb.getDb()
+      .collection('care')
+      .find({ careTypeId: reqTypeId })
+      .toArray();
+    result.toArray().then((lists) => {
+      //res.setHeader('Content-Type', 'application/json');
+      //res.status(200).json(lists);
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(result);  
+    });
+  } catch (err) {
+    res.status(400).json({ 
+      message: 'An error occurred while getting Care by Plant name.', 
+      error: err.message
+    });
+  }  
 
 };
 

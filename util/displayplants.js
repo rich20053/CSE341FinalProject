@@ -1,3 +1,5 @@
+const { getCategoryById } = require("../controllers/category");
+
 //const Validator = require('validatorjs');
 function plantHdr() {
     var headerStr = "";
@@ -35,38 +37,78 @@ function plantFtr(plantTotal) {
   return(footerStr);
 }
 
-function plantItem(pItem) {
+function plantItem(pItem, ctItem, crList) {
     var onePlant = "";
     onePlant += "<table>";
     onePlant += "<tbody>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Plant Name: </td><td>";
+    //console.log(pItem.name);
     onePlant += pItem.name;
     onePlant += "</td></tr>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Scientific Name: </td><td>";
+    //console.log(pItem.scientificName);
     onePlant += pItem.scientificName;
     onePlant += "</td></tr>";
+    onePlant += "<tr><td style='padding: 2px 10px;'>Category: </td><td>";
+    onePlant += ctItem.name;
+    onePlant += "</td></tr>";  
+    //onePlant += getCategoryById(pItem.categoryId);
     onePlant += "<tr><td style='padding: 2px 10px;'>Coldest Zone: </td><td>";
+    //console.log(pItem.coldestZone);
     onePlant += pItem.coldestZone;
     onePlant += "</td></tr>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Warmest Zone: </td><td>";
     onePlant += pItem.warmestZone;
     onePlant += "</td></tr>";
+    // Colors
+    onePlant += "<tr><td style='padding: 2px 10px;'>Colors: </td><td>";
+    pItem.colors.forEach(color => {
+        onePlant += color;
+        onePlant += ", ";
+    });
+    onePlant += "</td></tr>";
+    
+    onePlant += "<tr><td style='padding: 2px 10px;'>Height (inches): </td><td>";
+    onePlant += pItem.height;
+    onePlant += "</td></tr>";
+    onePlant += "<tr><td style='padding: 2px 10px;'>Space (inches): </td><td>";
+    onePlant += pItem.space;
+    onePlant += "</td></tr>";
+    onePlant += "<tr><td style='padding: 2px 10px;'>Days to Germination: </td><td>";
+    onePlant += pItem.daysToGermination;
+    onePlant += "</td></tr>";
+    onePlant += "<tr><td style='padding: 2px 10px;'>Days to Flower: </td><td>";
+    onePlant += pItem.daysToFlower;
+    onePlant += "</td></tr>";
+    onePlant += "<tr><td style='padding: 2px 10px;'>Days to Harvest: </td><td>";
+    onePlant += pItem.daysToHarvest;
+    onePlant += "</td></tr>";
+    // Colors
+    onePlant += "<tr><td style='padding: 2px 10px;'>Care: </td><td>";
+    crList.forEach(care => {
+        onePlant += care.description;
+        onePlant += "<br>";
+    });
+    onePlant += "</td></tr>";
+    
+    
+
     onePlant += "</tbody>";
     onePlant += "</table>";
-
+    return(onePlant);
 }
 
 function plantHTML(plants) {
     var plantsjson = plants;
+
     var plantHTMLString = "";
 
-    console.log("->"+plantHTMLString+"<-"); 
-    //plantHTMLString += plantHdr();
-    plantsjson.forEach(plantsjson => {
-        plantHTMLString += plantItem(plantsjson);  // Process each plant as needed
+    plantHTMLString += plantHdr();
+    plantsjson.forEach(plant => {
+        plantHTMLString += plantItem(plant, category, careList);  // Process each plant as needed
+        plantHTMLString += "<br>";
     });
-    //plantHTMLString += plantFtr(plants.length);  
-    console.log(plantHTMLString); 
+    plantHTMLString += plantFtr(plants.length);  
     return(plantHTMLString);
 };
 

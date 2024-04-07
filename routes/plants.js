@@ -7,8 +7,6 @@ const plantsController = require('../controllers/plants');
 
 router.get('/', plantsController.getAll);
 
-router.get('/:id', plantsController.getSingle);
-
 router.post('/', validation.plantCheck, plantsController.createPlant);
 
 router.put('/:id', validation.plantCheck, plantsController.updatePlant);
@@ -22,8 +20,6 @@ router.get('/color/:color', plantsController.getPlantsByColor);
 router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower);
 
 router.get('/full', plantsController.getAllFull);
-
-//router.get('/full', "../view/plantview.html");
 
 router.get('/full/:id', plantsController.getSingleFull);
 
@@ -42,6 +38,8 @@ router.get('/name/:name', plantsController.getPlantsByName);
 router.get('/sciname/:name', plantsController.getPlantsByScientificName);
 
 router.get('/zone/:zone', plantsController.getPlantsByHardinessZone);
+
+router.get('/:id', plantsController.getSingle);
 
 module.exports = router;
 

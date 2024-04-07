@@ -22,6 +22,7 @@ const getAll = async (req, res, next) => {
 
 // Return one Plant by id
 const getSingle = async (req, res, next) => {
+  console.log("Single");
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid Plant id to retrieve a Plant");
     return;
@@ -335,30 +336,51 @@ const getPlantsOrderedByDaysToHarvest = async (req, res, next) => {
 
 // Return all plants and print out full detail
 const getAllFull = async (req, res, next) => {
-  
-  const result = await mongodb.getDb().collection('plants').find();
-  //console.log(result);
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  try {
+     const result = await mongodb.getDb()
+     .collection('plants')
+     .find()
+/*     .toArray();
+     var allPlants = displayPlants.plantHTML(result);
+    res.status(200);
+    res.setHeader('Content-Type', 'text/html');
+    res.send(allPlants); */
+    .toArray().then((lists) => {
+      res.setHeader('Content-Type', 'text/html');
+      const headers = res.headers;
+      var allPlants = displayPlants.plantHTML(lists);
+      res.status(200);
+      res.send(allPlants);
+    });
+  } catch (err) {
+    res.status(400).json({ 
+      message: 'An error occurred while getting all Plants and displaying a full display.', 
+      error: err.message
+    });
+  }  
 };
 
 // Return one plant by id and print out full detail
 const getSingleFull = async (req, res, next) => {
+  console.log("Single");
+
+  /*
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json("Must use a valid plant id to retrieve a plant");
     return;
-  }
+  }*/
 
   const plantId = new ObjectId(req.params.id);
 
-  const result = await mongodb.getDb().collection('plants').find({ _id: plantId });
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    var item = displayPlants.plantHTML(lists);
-    res.status(200);//.json(item);
-    res.send(item);
+  const result = await mongodb.getDb()
+     .collection('plants')
+     .find({ _id: plantId })
+     .toArray().then((plants) => {
+      
+    res.setHeader('Content-Type', 'text/html');
+    var allPlants = displayPlants.plantHTML(plants);
+    res.status(200);
+    res.send(allPlants);
   });
 };
 

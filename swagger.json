@@ -30,6 +30,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -42,37 +45,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "categoryId": {
-                  "example": "any"
-                },
                 "name": {
-                  "example": "any"
-                },
-                "scientificName": {
-                  "example": "any"
-                },
-                "coldestZone": {
-                  "example": "any"
-                },
-                "warmestZone": {
-                  "example": "any"
-                },
-                "colors": {
-                  "example": "any"
-                },
-                "height": {
-                  "example": "any"
-                },
-                "space": {
-                  "example": "any"
-                },
-                "daysToGermination": {
-                  "example": "any"
-                },
-                "daysToFlower": {
-                  "example": "any"
-                },
-                "daysToHarvest": {
                   "example": "any"
                 }
               }
@@ -83,38 +56,16 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
     },
     "/plants/{id}": {
-      "get": {
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
       "put": {
         "description": "",
         "parameters": [
@@ -132,53 +83,20 @@
               "properties": {
                 "name": {
                   "example": "any"
-                },
-                "scientificName": {
-                  "example": "any"
-                },
-                "category_id": {
-                  "example": "any"
-                },
-                "coldestZone": {
-                  "example": "any"
-                },
-                "warmestZone": {
-                  "example": "any"
-                },
-                "colors": {
-                  "example": "any"
-                },
-                "height": {
-                  "example": "any"
-                },
-                "space": {
-                  "example": "any"
-                },
-                "daysToGermination": {
-                  "example": "any"
-                },
-                "daysToFlower": {
-                  "example": "any"
-                },
-                "daysToHarvest": {
-                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -198,9 +116,28 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -273,6 +210,43 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full": {
+      "get": {
+        "description": "",
+        "produces": [
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -484,6 +458,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -496,13 +473,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "plantId": {
-                  "example": "any"
-                },
-                "careTypeId": {
-                  "example": "any"
-                },
-                "description": {
+                "name": {
                   "example": "any"
                 }
               }
@@ -513,11 +484,11 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -560,13 +531,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "plantId": {
-                  "example": "any"
-                },
-                "careTypeId": {
-                  "example": "any"
-                },
-                "description": {
+                "name": {
                   "example": "any"
                 }
               }
@@ -574,17 +539,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -604,9 +566,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -668,6 +627,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -691,11 +653,11 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -746,17 +708,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -776,9 +735,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -792,6 +748,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -815,11 +774,11 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
@@ -870,17 +829,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -900,9 +856,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
