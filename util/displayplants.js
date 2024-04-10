@@ -1,9 +1,8 @@
-const { getCategoryById } = require("../controllers/category");
+//const { getCategoryById } = require("../controllers/category");
 const mongodb = require("../models/connect");
 const ObjectId = require('mongodb').ObjectId;
 
-
-//const Validator = require('validatorjs');
+// Construct HTML header
 function plantHdr() {
     var headerStr = "";
     headerStr +="<!DOCTYPE html>";
@@ -28,6 +27,7 @@ function plantHdr() {
     return(headerStr);
 }
 
+// Constuct HTML footer
 function plantFtr(plantTotal) {
   var footerStr = "";
   footerStr += "</section>";
@@ -40,6 +40,7 @@ function plantFtr(plantTotal) {
   return(footerStr);
 }
 
+// Get the name of the care type for use in HTML
 const getCareType = async (ctId) => {
     const collection =  await mongodb.getDb().collection('caretype');
     const reqCareTypeDoc = await collection.findOne({_id: ctId});
@@ -47,6 +48,7 @@ const getCareType = async (ctId) => {
     return(reqCareTypeName);
 }
 
+// Get the category of the plant for use in HTML
 const getCategory = async (catId) => {
     var catName = "";
     const collection =  await mongodb.getDb().collection('category');
@@ -59,6 +61,7 @@ const getCategory = async (catId) => {
     return(catName);
 }
 
+// Get the care information for use in HTML
 const getCares = async (plantId) => {
     var careString = "";
 
@@ -76,69 +79,31 @@ const getCares = async (plantId) => {
     }
     return (careString);
 }
-    
-/*
-    const result = await mongodb.getDb()
-      .collection('care')
-      .find({_id: plantId});
-    await result.toArray().then((lists) => {
-        console.log("care list");
-        console.log(lists.length);
-        for (const careItem of lists) {
-            console.log("in care loop");
-            careString += "<tr><td style='padding: 2px 10px;'>Care Description: </td><td>";
-            careString += careItem.description;
-            careString += "</td></tr>";
-        }
-    });
-    
 
-/*
-    const cursor = await mongodb.getDb().collection('care').find({_id: plantId});
-    //console.log("careDoc = " + typeof cursor);
-    //const careDescription = await 
-    
-    result = await cursor.toArray();
-    console.log("Result = " + result);
-    console.log("Result[0] = " + result[0]);
-
-    //console.log("careDescription = " + typeof careDescription);
-    careString += "<tr><td style='padding: 2px 10px;'>Care Description: </td><td>";
-    //careString += careDescription[0];
-    //careString += result[0].description;
-    //console.log("description"+result[0].description);
-    //console.log("item in careDescription[0] = "+careDescription[0]);
-    careString += "</td></tr>";  
-    console.log(careString);*/
-
+// Construct plant data for use in HTML
 const plantItem = async (pItem) => {
     var onePlant = "";
     onePlant += "<table>";
     onePlant += "<tbody>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Plant Name: </td><td>";
-    //console.log(pItem.name);
     onePlant += pItem.name;
     onePlant += "</td></tr>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Scientific Name: </td><td>";
-    //console.log(pItem.scientificName);
     onePlant += pItem.scientificName;
     onePlant += "</td></tr>";
     onePlant += await getCategory(pItem.categoryId);
     onePlant += "<tr><td style='padding: 2px 10px;'>Coldest Zone: </td><td>";
-    //console.log(pItem.coldestZone);
     onePlant += pItem.coldestZone;
     onePlant += "</td></tr>";
     onePlant += "<tr><td style='padding: 2px 10px;'>Warmest Zone: </td><td>";
     onePlant += pItem.warmestZone;
     onePlant += "</td></tr>";
-    // Colors
     onePlant += "<tr><td style='padding: 2px 10px;'>Colors: </td><td>";
     pItem.colors.forEach(color => {
         onePlant += color;
         onePlant += ", ";
     });
-    onePlant += "</td></tr>";
-    
+    onePlant += "</td></tr>";    
     onePlant += "<tr><td style='padding: 2px 10px;'>Height (inches): </td><td>";
     onePlant += pItem.height;
     onePlant += "</td></tr>";
@@ -154,16 +119,13 @@ const plantItem = async (pItem) => {
     onePlant += "<tr><td style='padding: 2px 10px;'>Days to Harvest: </td><td>";
     onePlant += pItem.daysToHarvest;
     onePlant += "</td></tr>";
-    //onePlant += "<tr><td style='padding: 2px 10px;'>Days to Harvest: </td><td>";
     onePlant += await getCares(pItem._id);
-    //onePlant += "</td></tr>";
-
     onePlant += "</tbody>";
     onePlant += "</table>";
-    //console.log(onePlant);
     return(onePlant);
 }
 
+// Assemble plant HTML
 const plantHTML = async (plants) => {
     var plantsjson = plants;
 
@@ -171,19 +133,10 @@ const plantHTML = async (plants) => {
 
     plantHTMLString += plantHdr();
     for (const plant of plantsjson) {
-        //console.log(plant.name);
         plantHTMLString += await plantItem(plant);  // Process each plant as needed
         plantHTMLString += "<br>";
     }
-/*
-    plantHTMLString += plantHdr();
-    await plantsjson.forEach(async (plant) => {
-        console.log(plant.name);
-        plantHTMLString += await plantItem(plant);  // Process each plant as needed
-        plantHTMLString += "<br>";
-    });*/
     plantHTMLString += plantFtr(plants.length);  
-    //console.log(plantHTMLString);
     return(plantHTMLString);
 };
 
