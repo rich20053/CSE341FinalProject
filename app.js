@@ -33,7 +33,8 @@ const config = {
   secret: process.env.AUTH0_CLIENT_SECRET,
   baseURL: process.env.AUTH0_BASE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
-  issuerBaseURL: 'https://dev-eoeqs0i46b7m7dfa.us.auth0.com'
+  issuerBaseURL: 'https://dev-eoeqs0i46b7m7dfa.us.auth0.com',
+  callbackURL: process.env.AUTH0_CALLBACK_URL
 };
 
 app.use(auth(config));
@@ -56,24 +57,7 @@ router.get('/logout', (req, res) => {
   req.logout(); // Correct usage for logout
   res.redirect('/login');
 });
-/*
-// Logout route
-router.get('/logout', (req, res) => {
-  console.log("Logout");
-  req.logout({
-    returnTo: AUTH0_BASE_URL+DASHBOARD,
-    clientID: AUTH0_CLIENT_ID
-  }, (err) => {
-    if (err) {
-      console.error('Logout error:', err);
-    } else {
-      console.log('Logout successful');
-      // Redirect or perform any post-logout actions here
-    }
-  });
-  res.redirect('/login');
-});
-*/
+
 // Middleware to make the `user` object available for all views
 app.use(function (req, res, next) {
   res.locals.user = req.oidc.user;
@@ -112,9 +96,6 @@ mongodb.initDb((err, mongodb) => {
     .listen(port, () => {
       console.log(`Listening on ${process.env.NODE_ENV}`);
     });
-    /*
-    app.listen(port);
-    console.log(`Connected to DB and listening on ${port}`);*/
   }
 });
 
