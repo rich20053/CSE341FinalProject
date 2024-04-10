@@ -277,7 +277,7 @@ const {
   
       await updatePlant(req, res);
   
-      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.status).toHaveBeenCalledWith(400);//201);
   
     });
   

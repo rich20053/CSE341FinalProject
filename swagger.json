@@ -47,6 +47,36 @@
               "properties": {
                 "name": {
                   "example": "any"
+                },
+                "scientificName": {
+                  "example": "any"
+                },
+                "categoryId": {
+                  "example": "any"
+                },
+                "coldestZone": {
+                  "example": "any"
+                },
+                "warmestZone": {
+                  "example": "any"
+                },
+                "colors": {
+                  "example": "any"
+                },
+                "height": {
+                  "example": "any"
+                },
+                "space": {
+                  "example": "any"
+                },
+                "daysToGermination": {
+                  "example": "any"
+                },
+                "daysToFlower": {
+                  "example": "any"
+                },
+                "daysToHarvest": {
+                  "example": "any"
                 }
               }
             }
@@ -81,7 +111,40 @@
             "schema": {
               "type": "object",
               "properties": {
+                "plantId": {
+                  "example": "any"
+                },
                 "name": {
+                  "example": "any"
+                },
+                "scientificName": {
+                  "example": "any"
+                },
+                "categoryId": {
+                  "example": "any"
+                },
+                "coldestZone": {
+                  "example": "any"
+                },
+                "warmestZone": {
+                  "example": "any"
+                },
+                "colors": {
+                  "example": "any"
+                },
+                "height": {
+                  "example": "any"
+                },
+                "space": {
+                  "example": "any"
+                },
+                "daysToGermination": {
+                  "example": "any"
+                },
+                "daysToFlower": {
+                  "example": "any"
+                },
+                "daysToHarvest": {
                   "example": "any"
                 }
               }
@@ -473,7 +536,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "plantId": {
+                  "example": "any"
+                },
+                "careTypeId": {
+                  "example": "any"
+                },
+                "description": {
                   "example": "any"
                 }
               }
@@ -531,7 +600,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "plantId": {
+                  "example": "any"
+                },
+                "careTypeId": {
+                  "example": "any"
+                },
+                "description": {
                   "example": "any"
                 }
               }

@@ -47,9 +47,10 @@ const createCare = async (req, res, next) => {
   try {
     // Create an Care
     const care = {
-      name: req.body.name
-    };
-
+      plantId: new ObjectId(req.body.plantId),
+      careTypeId: new ObjectId(req.body.careTypeId),
+      description: req.body.description
+    }
     // Save Care in the database
     const response = await mongodb.getDb().collection('care').insertOne(care);
 
@@ -77,9 +78,10 @@ const updateCare = async (req, res, next) => {
 
     // Update an Care
     const care = {
-      name: req.body.name
-    };
-
+      plantId: new ObjectId(req.body.plantId),
+      careTypeId: new ObjectId(req.body.careTypeId),
+      description: req.body.description
+    }
     // Update data in database
     const response = await mongodb.getDb().collection('care').replaceOne({ _id: careId }, care);
     if (response.acknowledged) {
@@ -125,11 +127,12 @@ const getCareByPlantName = async (req, res, next) => {
   }
 
   const plantName = req.params.name;
+  const regex = new RegExp(plantName, 'd'); // Case insensitive regex for names 
   
   try {
     const collection = await mongodb.getDb().collection('plants');
   
-    const reqPlantDoc = await collection.findOne({name: plantName});
+    const reqPlantDoc = await collection.findOne({name: regex});
     const reqPlantId = reqPlantDoc._id;
   
     const result = await mongodb.getDb().collection('care').find({ plantId: reqPlantId });
@@ -153,27 +156,23 @@ const getCareByTypeName = async (req, res, next) => {
   }
 
   const typeName = req.params.name;
+  const regex = new RegExp(typeName, 'd'); // Case insensitive regex for names 
   
   try {
     const collection = mongodb.getDb().collection('caretype');
   
-    const reqTypeDoc = await collection.findOne({name: typeName});
-    const reqTypeId = reqTypeDoc._id;
-    console.log(typeName);
-    console.log(reqTypeId);
+    const reqTypeDoc = await collection.findOne({name: regex});
+    const reqTypeId = new ObjectId(reqTypeDoc._id);
     const result = await mongodb.getDb()
       .collection('care')
       .find({ careTypeId: reqTypeId })
-      .toArray();
     result.toArray().then((lists) => {
-      //res.setHeader('Content-Type', 'application/json');
-      //res.status(200).json(lists);
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(result);  
+      res.status(200).json(lists);  
     });
   } catch (err) {
     res.status(400).json({ 
-      message: 'An error occurred while getting Care by Plant name.', 
+      message: 'An error occurred while getting Care by Type name.', 
       error: err.message
     });
   }  

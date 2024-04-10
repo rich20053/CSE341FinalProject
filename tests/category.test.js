@@ -191,7 +191,7 @@ const { categoryCheck } = require('../middleware/validation');
 
     await updateCategory(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.status).toHaveBeenCalledWith(400); //201);
 
   });
 

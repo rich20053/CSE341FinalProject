@@ -28,16 +28,16 @@ const getSingle = async (req, res, next) => {
   }
 
   try {
-    const CareTypeId = new ObjectId(req.params.id);
+    const careTypeId = new ObjectId(req.params.id);
     const result = await mongodb.getDb()
       .collection('caretype')
-      .findOne({ _id: CareTypeId });
+      .findOne({ _id: careTypeId });
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ 
       message: 'Error occurred', 
-      error: err.message,
+      error: err.message
     });
   };
 };
@@ -74,15 +74,15 @@ const updateCareType = async (req, res, next) => {
   }
 
   try {
-    const CareTypeId = new ObjectId(req.params.id);
+    const careTypeId = new ObjectId(req.params.id);
 
     // Update an CareType
-    const CareType = {
+    const careType = {
       name: req.body.name
     };
 
     // Update data in database
-    const response = await mongodb.getDb().collection('caretype').replaceOne({ _id: CareTypeId }, CareType);
+    const response = await mongodb.getDb().collection('caretype').replaceOne({ _id: careTypeId }, careType);
     if (response.acknowledged) {
       res.status(201).json({ message: 'CareType updated successfully' });
     }

@@ -27,16 +27,16 @@ const getSingle = async (req, res, next) => {
   }
 
   try {
-    const categoryId = new ObjectId(req.params.id);
+    const passedCategoryId = new ObjectId(req.params.id);
     const result = await mongodb.getDb()
       .collection('category')
-      .findOne({ _id: categoryId });
+      .findOne({ _id: passedCategoryId });
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ 
       message: 'Error occurred', 
-      error: err.message,
+      error: err.message
     });
   };
 };
@@ -73,15 +73,19 @@ const updateCategory = async (req, res, next) => {
   }
 
   try {
-    const categoryId = new ObjectId(req.params.id);
+    const passedCategoryId = new ObjectId(req.params.id);
 
-    // Update an category
-    const category = {
+    // Update an category with this name
+    const categoryChange = {
       name: req.body.name
     };
 
     // Update data in database
-    const response = await mongodb.getDb().collection('category').replaceOne({ _id: categoryId }, category);
+
+    const response = await mongodb.getDb()
+      .collection('category')
+      .replaceOne({ _id: passedCategoryId }, categoryChange);
+
     if (response.acknowledged) {
       res.status(201).json({ message: 'Category updated successfully' });
     }
