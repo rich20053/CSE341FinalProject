@@ -15,7 +15,7 @@ const { categoryCheck } = require('../middleware/validation');
   const testCategoryData = [
     {
       "_id": "65f2658ad22b76d6ea65e7f4",
-      "name": "Flower"
+      "name": "Annual"
     },
     {
       "_id": "65f507ffbff26de7fd7c9e25",
@@ -171,7 +171,7 @@ const { categoryCheck } = require('../middleware/validation');
       await categoryCheck(req, res);
       expect(res.status).toHaveBeenCalledWith(412);
     });
-
+/*
   // TESTS FOR updateCategory
   test('Should update a Category and return 201 status', async () => {
     const req = {
@@ -190,9 +190,39 @@ const { categoryCheck } = require('../middleware/validation');
     });
 
     await updateCategory(req, res);
+    expect(res.status).toHaveBeenCalledWith(200); //201);
+    expect(res.json).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'newId' });
 
-    expect(res.status).toHaveBeenCalledWith(400); //201);
+  });
 
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn()
+  }; */
+  
+  // TESTS FOR updateCategory
+  test('Should update a Category and return 201 status', async () => {
+    const req = {
+      params: { id: testCategoryData[0]._id.toString() },
+      body: {
+        //id: testCategoryData[0]._id.toString(),
+        name: "Bushes"
+      }
+    };
+  
+    // Mock database methods
+    const testUpdateOne = jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'newId' });
+    mongodb.getDb = jest.fn().mockReturnValue({
+      collection: jest.fn().mockReturnThis(),
+      updateOne: testUpdateOne
+    });
+  
+    // Call the function to be tested
+    await updateCategory(req, res);
+  
+    // Check the response
+    expect(res.status).toHaveBeenCalledWith(201); // Check for the correct status code
+    expect(res.json).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'newId' }); // Check the response body
   });
 
   //  Unsuccessful updateCategory - Invalid ID

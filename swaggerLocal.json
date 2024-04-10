@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Garden Grow API",
-    "description": "API for Home Gardeners",
+    "description": "API for Home Gardening",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -34,11 +34,14 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "post": {
-        "description": "Insert Plants",
+        "description": "Create a Plants",
         "tags": 
           ["Plants"],
         "parameters": [
@@ -48,13 +51,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "categoryId": {
-                  "example": "any"
-                },
                 "name": {
                   "example": "any"
                 },
                 "scientificName": {
+                  "example": "any"
+                },
+                "categoryId": {
                   "example": "any"
                 },
                 "coldestZone": {
@@ -72,7 +75,7 @@
                 "space": {
                   "example": "any"
                 },
-                "daysToGerminate": {
+                "daysToGermination": {
                   "example": "any"
                 },
                 "daysToFlower": {
@@ -89,42 +92,18 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
     },
     "/plants/{id}": {
-      "get": {
-        "description": "Get Plant by Id",
-        "tags": 
-          ["Plants"],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      },
       "put": {
-        "description": "Update Plant by Id",
+        "description": "Update a Plant Matching the Provided Id",
         "tags": 
           ["Plants"],
         "parameters": [
@@ -140,13 +119,16 @@
             "schema": {
               "type": "object",
               "properties": {
+                "plantId": {
+                  "example": "any"
+                },
                 "name": {
                   "example": "any"
                 },
                 "scientificName": {
                   "example": "any"
                 },
-                "category_id": {
+                "categoryId": {
                   "example": "any"
                 },
                 "coldestZone": {
@@ -164,7 +146,7 @@
                 "space": {
                   "example": "any"
                 },
-                "daysToGerminate": {
+                "daysToGermination": {
                   "example": "any"
                 },
                 "daysToFlower": {
@@ -178,22 +160,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "Delete Plant by Id",
+        "description": "Delete a Plants",
         "tags": 
           ["Plants"],
         "parameters": [
@@ -210,63 +189,13 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/category/": {
-      "get": {
-        "description": "Get all Categories",
-        "tags": 
-          ["Category"],
-          "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       },
-      "post": {
-        "description": "Insert Categories",
-        "tags": 
-          ["Category"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/category/{id}": {
       "get": {
-        "description": "Get Category by Id",
+        "description": "Get All Plants Whose Id Matches the Provided String",
         "tags": 
-          ["Category"],
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -286,50 +215,112 @@
             "description": "Bad Request"
           }
         }
-      },
-      "put": {
-        "description": "Update Category by Id",
+      }
+    },
+    "/plants/category/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Category Name Matches the Provided String",
         "tags": 
-          ["Category"],
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
-          },
-          "412": {
-            "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
-      },
-      "delete": {
-        "description": "Delete Category by Id",
+      }
+    },
+    "/plants/color/{color}": {
+      "get": {
+        "description": "Get All Plants Whose Color Matches the Provided String",
         "tags": 
-          ["Category"],
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "color",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/flower/{direction}": {
+      "get": {
+        "description": "Get All Plants Listed in Days to Flower Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full": {
+      "get": {
+        "description": "Get All Plants Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/{id}": {
+      "get": {
+        "description": "Get All Plants Whose Id Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -344,9 +335,324 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/category/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Category Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/color/{color}": {
+      "get": {
+        "description": "Get All Plants That Come in a Color that Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+       "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "color",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/name/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Name Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/zone/{zone}": {
+      "get": {
+        "description": "Get All Plants That Fall in the Provided Hardiness Zone (1-13)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/germination/{direction}": {
+      "get": {
+        "description": "Get All Plants Listed in Height Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/harvest/{direction}": {
+      "get": {
+        "description": "Get All Plants Listed in Days to Harvest Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/height/{direction}": {
+      "get": {
+        "description": "Get All Plants Listed in Height Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/height/{height}": {
+      "get": {
+        "description": "Get All Plants That Match the Provided Height",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "height",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/height/{lowheight}/{topheight}": {
+      "get": {
+        "description": "Get All Plants Whose Height Falls Between the Two Provided Values",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lowheight",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "topheight",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/name/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Name Matche the Provided String",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/sciname/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Scientific Name Matches the String",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/zone/{zone}": {
+      "get": {
+        "description": "Get All Plants That Can Grow in the Provided Hardiness Zone",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -356,17 +662,20 @@
         "description": "Get All Care Records",
         "tags": 
           ["Care"],
-          "produces": [
+        "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "post": {
-        "description": "Insert Care Records",
+        "description": "Create a Care Record",
         "tags": 
           ["Care"],
         "parameters": [
@@ -393,18 +702,18 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
     },
     "/care/{id}": {
       "get": {
-        "description": "Get Care by Id",
+        "description": "Get a Care Record",
         "tags": 
           ["Care"],
         "produces": [
@@ -428,7 +737,7 @@
         }
       },
       "put": {
-        "description": "Update Care by Id",
+        "description": "Update a Care Record",
         "tags": 
           ["Care"],
         "parameters": [
@@ -458,22 +767,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "Delete Care by Id",
+        "description": "Delete a Care Record",
         "tags": 
           ["Care"],
         "parameters": [
@@ -490,16 +796,196 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/care/plant/{name}": {
+      "get": {
+        "description": "Get All Care Records Where the Name of the Plant Matches the String",
+        "tags": 
+          ["Care"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/care/type/{name}": {
+      "get": {
+        "description": "Get All Care Record Where the Name or the Type Matches the String",
+        "tags": 
+          ["Care"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/category/": {
+      "get": {
+        "description": "Get All Category Records",
+        "tags": 
+          ["Category"],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a Category Record",
+        "tags": 
+          ["Category"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "description": "Get a Category Record",
+        "tags": 
+          ["Category"],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a Category Record",
+        "tags": 
+          ["Category"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a Category Record",
+        "tags": 
+          ["Category"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/caretype/": {
       "get": {
-        "description": "Get Care Type by Id",
+        "description": "Get All Care Type Records",
         "tags": 
           ["Care Type"],
         "produces": [
@@ -508,11 +994,14 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
       "post": {
-        "description": "Insert Care Types",
+        "description": "Create a Care Type Record",
         "tags": 
           ["Care Type"],
         "parameters": [
@@ -533,18 +1022,18 @@
           "201": {
             "description": "Created"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
     },
     "/caretype/{id}": {
       "get": {
-        "description": "Get Care Type by Id",
+        "description": "Get One Care Type Record",
         "tags": 
           ["Care Type"],
         "produces": [
@@ -568,7 +1057,7 @@
         }
       },
       "put": {
-        "description": "Update Care Type by Id",
+        "description": "Update a Care Type Record",
         "tags": 
           ["Care Type"],
         "parameters": [
@@ -592,22 +1081,19 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
           "412": {
             "description": "Precondition Failed"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "Delete Care Type by Id",
+        "description": "Delete a Care Type Record",
         "tags": 
           ["Care Type"],
         "parameters": [
@@ -624,9 +1110,6 @@
           },
           "400": {
             "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }

@@ -21,8 +21,6 @@ router.get('/flower/:direction', plantsController.getPlantsOrderedByDaysToFlower
 
 router.get('/full', plantsController.getAllFull);
 
-router.get('/full/:id', plantsController.getSingleFull);
-
 router.get('/full/category/:name', plantsController.getFullPlantsByCategoryName);
 
 router.get('/full/color/:color', plantsController.getFullPlantsByColor);
@@ -30,6 +28,8 @@ router.get('/full/color/:color', plantsController.getFullPlantsByColor);
 router.get('/full/name/:name', plantsController.getFullPlantsByName);
 
 router.get('/full/zone/:zone', plantsController.getFullPlantsByHardinessZone);
+
+router.get('/full/:id', plantsController.getSingleFull);
 
 router.get('/germination/:direction', plantsController.getPlantsOrderedByDaysToGermination);
 

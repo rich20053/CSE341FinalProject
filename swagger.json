@@ -5,15 +5,17 @@
     "description": "API for Home Gardening",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "gardengrow.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "API Documentation",
+        "tags": 
+          ["Documentation"],
         "responses": {
           "default": {
             "description": ""
@@ -23,7 +25,9 @@
     },
     "/plants/": {
       "get": {
-        "description": "",
+        "description": "Get All Plants",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -37,7 +41,9 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a Plants",
+        "tags": 
+          ["Plants"],
         "parameters": [
           {
             "name": "body",
@@ -97,7 +103,9 @@
     },
     "/plants/{id}": {
       "put": {
-        "description": "",
+        "description": "Update a Plant Matching the Provided Id",
+        "tags": 
+          ["Plants"],
         "parameters": [
           {
             "name": "id",
@@ -164,7 +172,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a Plants",
+        "tags": 
+          ["Plants"],
         "parameters": [
           {
             "name": "id",
@@ -183,7 +193,9 @@
         }
       },
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Id Matches the Provided String",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -207,7 +219,9 @@
     },
     "/plants/category/{name}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Category Name Matches the Provided String",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -231,7 +245,9 @@
     },
     "/plants/color/{color}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Color Matches the Provided String",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -255,7 +271,9 @@
     },
     "/plants/flower/{direction}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Listed in Days to Flower Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -279,7 +297,9 @@
     },
     "/plants/full": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Displaying in HTML",
+        "tags": 
+          ["Plants"],
         "produces": [
           "text/html"
         ],
@@ -295,7 +315,9 @@
     },
     "/plants/full/{id}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Id Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
         "produces": [
           "text/html"
         ],
@@ -310,13 +332,122 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/category/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Category Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/color/{color}": {
+      "get": {
+        "description": "Get All Plants That Come in a Color that Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+       "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "color",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/name/{name}": {
+      "get": {
+        "description": "Get All Plants Whose Name Matches the Provided String Displaying in HTML",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/plants/full/zone/{zone}": {
+      "get": {
+        "description": "Get All Plants That Fall in the Provided Hardiness Zone (1-13)",
+        "tags": 
+          ["Plants"],
+        "produces": [
+          "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
     "/plants/germination/{direction}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Listed in Height Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -340,7 +471,9 @@
     },
     "/plants/harvest/{direction}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Listed in Days to Harvest Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -364,7 +497,9 @@
     },
     "/plants/height/{direction}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Listed in Height Order Based on Provided Value (1 = Ascending, -1 = Descending)",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -388,7 +523,9 @@
     },
     "/plants/height/{height}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants That Match the Provided Height",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -412,7 +549,9 @@
     },
     "/plants/height/{lowheight}/{topheight}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Height Falls Between the Two Provided Values",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -442,7 +581,9 @@
     },
     "/plants/name/{name}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Name Matche the Provided String",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -466,7 +607,9 @@
     },
     "/plants/sciname/{name}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants Whose Scientific Name Matches the String",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -490,7 +633,9 @@
     },
     "/plants/zone/{zone}": {
       "get": {
-        "description": "",
+        "description": "Get All Plants That Can Grow in the Provided Hardiness Zone",
+        "tags": 
+          ["Plants"],
         "produces": [
           "application/json"
         ],
@@ -514,7 +659,9 @@
     },
     "/care/": {
       "get": {
-        "description": "",
+        "description": "Get All Care Records",
+        "tags": 
+          ["Care"],
         "produces": [
           "application/json"
         ],
@@ -528,7 +675,9 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a Care Record",
+        "tags": 
+          ["Care"],
         "parameters": [
           {
             "name": "body",
@@ -564,7 +713,9 @@
     },
     "/care/{id}": {
       "get": {
-        "description": "",
+        "description": "Get a Care Record",
+        "tags": 
+          ["Care"],
         "produces": [
           "application/json"
         ],
@@ -586,7 +737,9 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a Care Record",
+        "tags": 
+          ["Care"],
         "parameters": [
           {
             "name": "id",
@@ -626,7 +779,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a Care Record",
+        "tags": 
+          ["Care"],
         "parameters": [
           {
             "name": "id",
@@ -647,7 +802,9 @@
     },
     "/care/plant/{name}": {
       "get": {
-        "description": "",
+        "description": "Get All Care Records Where the Name of the Plant Matches the String",
+        "tags": 
+          ["Care"],
         "produces": [
           "application/json"
         ],
@@ -671,7 +828,9 @@
     },
     "/care/type/{name}": {
       "get": {
-        "description": "",
+        "description": "Get All Care Record Where the Name or the Type Matches the String",
+        "tags": 
+          ["Care"],
         "produces": [
           "application/json"
         ],
@@ -695,7 +854,9 @@
     },
     "/category/": {
       "get": {
-        "description": "",
+        "description": "Get All Category Records",
+        "tags": 
+          ["Category"],
         "produces": [
           "application/json"
         ],
@@ -709,7 +870,9 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a Category Record",
+        "tags": 
+          ["Category"],
         "parameters": [
           {
             "name": "body",
@@ -739,7 +902,9 @@
     },
     "/category/{id}": {
       "get": {
-        "description": "",
+        "description": "Get a Category Record",
+        "tags": 
+          ["Category"],
         "produces": [
           "application/json"
         ],
@@ -761,7 +926,9 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a Category Record",
+        "tags": 
+          ["Category"],
         "parameters": [
           {
             "name": "id",
@@ -795,7 +962,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a Category Record",
+        "tags": 
+          ["Category"],
         "parameters": [
           {
             "name": "id",
@@ -816,7 +985,9 @@
     },
     "/caretype/": {
       "get": {
-        "description": "",
+        "description": "Get All Care Type Records",
+        "tags": 
+          ["Care Type"],
         "produces": [
           "application/json"
         ],
@@ -830,7 +1001,9 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a Care Type Record",
+        "tags": 
+          ["Care Type"],
         "parameters": [
           {
             "name": "body",
@@ -860,7 +1033,9 @@
     },
     "/caretype/{id}": {
       "get": {
-        "description": "",
+        "description": "Get One Care Type Record",
+        "tags": 
+          ["Care Type"],
         "produces": [
           "application/json"
         ],
@@ -882,7 +1057,9 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a Care Type Record",
+        "tags": 
+          ["Care Type"],
         "parameters": [
           {
             "name": "id",
@@ -916,7 +1093,9 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete a Care Type Record",
+        "tags": 
+          ["Care Type"],
         "parameters": [
           {
             "name": "id",
