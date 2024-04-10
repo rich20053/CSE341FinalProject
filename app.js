@@ -34,7 +34,7 @@ const config = {
   baseURL: process.env.AUTH0_BASE_URL,
   clientID: process.env.AUTH0_CLIENT_ID,
   issuerBaseURL: 'https://dev-eoeqs0i46b7m7dfa.us.auth0.com',
-  callbackURL: process.env.AUTH0_CALLBACK_URL
+  //callbackURL: process.env.AUTH0_CALLBACK_URL
 };
 
 app.use(auth(config));
