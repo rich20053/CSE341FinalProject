@@ -91,10 +91,9 @@ const updatePlant = async (req, res, next) => {
 
   try {
     // Use plant id
-    plantId = new ObjectId(req.body.plantId);
-    plantStr = req.body.plantId;
-    console.log(req.body.plantId);
-
+    const plantId = new ObjectId(req.body.plantId);
+    const plantStr = req.body.plantId;
+    
     // Update an plant
     const plant = {
       $set: {
