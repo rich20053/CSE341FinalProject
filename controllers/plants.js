@@ -92,11 +92,11 @@ const updatePlant = async (req, res, next) => {
   try {
     // Use plant id
     const plantId = new ObjectId(req.body.plantId);
-    const plantStr = req.body.plantId;
     
     // Update an plant
     const plant = {
       $set: {
+        _id: plantId,
         name: req.body.name,
         scientificName: req.body.scientificName,
         categoryId: new ObjectId(req.body.categoryId),
@@ -114,7 +114,7 @@ const updatePlant = async (req, res, next) => {
     // Update data in database
     const response = await mongodb.getDb().collection('plants').updateOne({ _id: plantId }, plant);
     if (response.acknowledged) {
-      res.status(201).json({ message: 'Plant updated successfully ' + plantId + " " + plantStr});
+      res.status(201).json({ message: 'Plant updated successfully '});
     }
     
   } catch (err) {
