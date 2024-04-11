@@ -193,7 +193,7 @@ const {
   
       await updateCareType(req, res);
   
-      expect(res.status).toHaveBeenCalledWith(400); //201);
+      expect(res.status).toHaveBeenCalledWith(201); //201);
   
     });
   

@@ -84,7 +84,7 @@ const updateCategory = async (req, res, next) => {
 
     const response = await mongodb.getDb()
       .collection('category')
-      .replaceOne({ _id: passedCategoryId }, categoryChange);
+      .updateOne({ _id: passedCategoryId }, categoryChange);
 
     if (response.acknowledged) {
       res.status(201).json({ message: 'Category updated successfully' });

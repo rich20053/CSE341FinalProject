@@ -111,7 +111,7 @@ const updatePlant = async (req, res, next) => {
     };
 
     // Update data in database
-    const response = await mongodb.getDb().collection('plants').replaceOne({ _id: plantId }, plant);
+    const response = await mongodb.getDb().collection('plants').updateOne({ _id: plantId }, plant);
     if (response.acknowledged) {
       res.status(201).json({ message: 'Plant updated successfully ' + plantId + " " + plantStr});
     }

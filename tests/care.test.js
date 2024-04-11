@@ -207,7 +207,7 @@ const {
   
       await updateCare(req, res);
   
-      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.status).toHaveBeenCalledWith(201);
   
     });
   
@@ -266,55 +266,6 @@ const {
       await deleteCare(req, res);
       expect(res.status).toHaveBeenCalledWith(400);
     });
-
-    /*
-    // TESTS FOR getCareByTypeName
-    //  Successful getCareByTypeName
-      test('Care getCareByTypeName should retrieve a list of Care records and return status 200', async () => {
-        const testToArray = jest.fn().mockResolvedValue(testCareData);
-        const testFind = jest.fn().mockReturnThis();
-        mongodb.initDb;
-        mongodb.getDb = jest.fn().mockReturnValue({
-          collection: jest.fn().mockReturnValue({ 
-            find: testFind,
-            toArray: testToArray
-          })
-        });
-        // Create a test request object
-        const req = {}; 
-  
-        await getAll(req, res);
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith(testCareData); 
-
-        const testFindOne = jest.fn().mockResolvedValue(testCareData[0]);
-        mongodb.getDb = jest.fn().mockReturnValue({
-          collection: jest.fn().mockReturnValue({ 
-            findOne: testFindOne })
-        });
-        const req = { params: { name: "Pruning" } };
-    
-        await getCareByTypeName(req, res);
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith(testCareData);
-      });
-    
-      // Care getCareByTypeName error handling
-      test('Care getCareByTypeName should return status 400 if error occurs', async () => {
-        const testFindOne = jest.fn().mockRejectedValue(new Error('Test error'));
-        mongodb.getDb = jest.fn().mockReturnValue({ 
-          collection: jest.fn().mockReturnValue({ 
-            findOne: testFindOne 
-          }) 
-        });
-        const req = { params: { name: "Pruning" } };
-    
-        await getCareByTypeName(req, res);
-     
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({ message: 'An error occurred while getting Care by Plant name.', error: 'Test error' });
-      });
-      */
 
       // Tests are finished. Close the connections.
       afterAll(async () => {

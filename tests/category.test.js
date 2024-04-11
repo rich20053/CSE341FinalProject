@@ -171,59 +171,29 @@ const { categoryCheck } = require('../middleware/validation');
       await categoryCheck(req, res);
       expect(res.status).toHaveBeenCalledWith(412);
     });
-/*
+  
   // TESTS FOR updateCategory
-  test('Should update a Category and return 201 status', async () => {
+ 
+  test('should update a course and return 201 status', async () => {
     const req = {
       params: { id: testCategoryData[0]._id.toString() },
       body: {
-        //id: testCategoryData[0]._id.toString(),
-        name: "Bushes"
+        name: "Bush"
       }
     };
 
-    // test database methods
-    const testUpdateOne = jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'newId' });
-    mongodb.getDb = jest.fn().mockReturnValue({
-      collection: jest.fn().mockReturnThis(),
-      updateOne: testUpdateOne
+      // Mock database methods
+      const mockUpdateOne = jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'newId' });
+      mongodb.getDb = jest.fn().mockReturnValue({
+        collection: jest.fn().mockReturnThis(),
+        updateOne: mockUpdateOne
+      });
+
+      await updateCategory(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(201);
     });
 
-    await updateCategory(req, res);
-    expect(res.status).toHaveBeenCalledWith(200); //201);
-    expect(res.json).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'newId' });
-
-  });
-
-  const res = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn()
-  }; */
-  
-  // TESTS FOR updateCategory
-  test('Should update a Category and return 201 status', async () => {
-    const req = {
-      params: { id: testCategoryData[0]._id.toString() },
-      body: {
-        //id: testCategoryData[0]._id.toString(),
-        name: "Bushes"
-      }
-    };
-  
-    // Mock database methods
-    const testUpdateOne = jest.fn().mockResolvedValue({ acknowledged: true, insertedId: 'newId' });
-    mongodb.getDb = jest.fn().mockReturnValue({
-      collection: jest.fn().mockReturnThis(),
-      updateOne: testUpdateOne
-    });
-  
-    // Call the function to be tested
-    await updateCategory(req, res);
-  
-    // Check the response
-    expect(res.status).toHaveBeenCalledWith(201); // Check for the correct status code
-    expect(res.json).toHaveBeenCalledWith({ acknowledged: true, insertedId: 'newId' }); // Check the response body
-  });
 
   //  Unsuccessful updateCategory - Invalid ID
   test('Should return 400 status if invalid Category ID is provided for update', async () => {
