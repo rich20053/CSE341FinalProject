@@ -97,17 +97,19 @@ const updatePlant = async (req, res, next) => {
 
     // Update an plant
     const plant = {
-      name: req.body.name,
-      scientificName: req.body.scientificName,
-      categoryId: new ObjectId(req.body.categoryId),
-      coldestZone: req.body.coldestZone,
-      warmestZone: req.body.warmestZone,
-      colors: req.body.colors,
-      height: req.body.height,
-      space: req.body.space,
-      daysToGermination: req.body.daysToGermination,
-      daysToFlower: req.body.daysToFlower,
-      daysToHarvest: req.body.daysToHarvest
+      $set: {
+        name: req.body.name,
+        scientificName: req.body.scientificName,
+        categoryId: new ObjectId(req.body.categoryId),
+        coldestZone: req.body.coldestZone,
+        warmestZone: req.body.warmestZone,
+        colors: req.body.colors,
+        height: req.body.height,
+        space: req.body.space,
+        daysToGermination: req.body.daysToGermination,
+        daysToFlower: req.body.daysToFlower,
+        daysToHarvest: req.body.daysToHarvest
+      }
     };
 
     // Update data in database

@@ -78,10 +78,13 @@ const updateCare = async (req, res, next) => {
 
     // Update an Care
     const care = {
-      plantId: new ObjectId(req.body.plantId),
-      careTypeId: new ObjectId(req.body.careTypeId),
-      description: req.body.description
-    }
+      $set: {
+        plantId: new ObjectId(req.body.plantId),
+        careTypeId: new ObjectId(req.body.careTypeId),
+        description: req.body.description
+      }
+    };
+
     // Update data in database
     const response = await mongodb.getDb().collection('care').updateOne({ _id: careId }, care);
     if (response.acknowledged) {

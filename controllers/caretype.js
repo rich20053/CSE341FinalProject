@@ -78,7 +78,9 @@ const updateCareType = async (req, res, next) => {
 
     // Update an CareType
     const careType = {
-      name: req.body.name
+      $set: {
+        name: req.body.name
+      }
     };
 
     // Update data in database
