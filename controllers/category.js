@@ -76,10 +76,14 @@ const updateCategory = async (req, res, next) => {
     const passedCategoryId = new ObjectId(req.params.id);
 
     // Update an category with this name
+    //const categoryChange = {
+    //  name: req.body.name
+    //};
     const categoryChange = {
-      name: req.body.name
+      $set: {
+        name: req.body.name
+      }
     };
-
     // Update data in database
 
     const response = await mongodb.getDb()
